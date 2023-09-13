@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/theme_provider.dart';
 import '../services/assets_manager.dart';
 import '../widgets/app_name_text.dart';
-import '../widgets/subtitle_text.dart';
 import '../widgets/title_text.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -10,6 +12,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
@@ -19,20 +22,14 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
         title: const AppNameTextWidget(),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SubtitleTextWidget(
-              label: "Hello world!!!!!",
-            ),
-            TitlesTextWidget(
-              label: "Hello this is a title" * 10,
-            ),
-            ElevatedButton(onPressed: () {}, child: const Text("Hello world")),
-          ],
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness:
+              themeProvider.getIsDarkTheme ? Brightness.light : Brightness.dark,
         ),
+      ),
+      body: const Center(
+        child: TitlesTextWidget(label: 'HomeScreen'),
       ),
     );
   }

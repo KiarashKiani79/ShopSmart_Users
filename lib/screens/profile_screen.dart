@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
 import 'package:shopsmart_users/widgets/app_name_text.dart';
@@ -13,7 +14,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
+    final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
@@ -23,6 +24,11 @@ class ProfileScreen extends StatelessWidget {
           ),
         ),
         title: const AppNameTextWidget(),
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness:
+              themeProvider.getIsDarkTheme ? Brightness.light : Brightness.dark,
+        ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

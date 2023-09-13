@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart'; // Import for SystemUiOverlayStyle
 import '/consts/app_colors.dart';
 
 class Styles {
-  //
-
   static ThemeData themeData({
     required bool isDarkTheme,
     required BuildContext context,
@@ -29,16 +26,3 @@ class Styles {
     );
   }
 }
-
-// static void setSystemUIOverlayStyle({required bool isDarkTheme}) {
-//   // Set the status bar color and icons based on the theme
-//   final statusBarColor = isDarkTheme
-//       ? Colors.black // You can customize this color as needed
-//       : Colors.white; // You can customize this color as needed
-
-//   // Set the SystemUiOverlayStyle
-//   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-//     statusBarColor: statusBarColor,
-//     statusBarIconBrightness: isDarkTheme ? Brightness.light : Brightness.dark,
-//   ));
-// }
