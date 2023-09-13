@@ -28,7 +28,7 @@ class SearchScreen extends StatelessWidget {
               themeProvider.getIsDarkTheme ? Brightness.light : Brightness.dark,
         ),
       ),
-      body: Center(
+      body: const Center(
         child: TitlesTextWidget(label: "SearchScreen"),
       ),
     );

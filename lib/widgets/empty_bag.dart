@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
-import '../services/assets_manager.dart';
 import 'subtitle_text.dart';
 import 'title_text.dart';
 
