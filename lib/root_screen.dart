@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import '/screens/cart_screen.dart';
 import '/screens/home_screen.dart';
@@ -40,7 +38,7 @@ class _RootScreenState extends State<RootScreen> {
       ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: currentScreen,
-        backgroundColor: Colors.transparent,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         height: kBottomNavigationBarHeight,
         onDestinationSelected: (index) {
           setState(() {
