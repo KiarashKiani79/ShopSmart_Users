@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 
-import '../../services/assets_manager.dart';
-import '../../widgets/empty_bag.dart';
-import '../../widgets/title_text.dart';
+import '../services/assets_manager.dart';
+import '../widgets/empty_bag.dart';
+import '../widgets/title_text.dart';
+import 'bottom_checkout.dart';
 import 'cart_widget.dart';
 
 class CartScreen extends StatelessWidget {
@@ -22,6 +23,7 @@ class CartScreen extends StatelessWidget {
             ),
           )
         : Scaffold(
+            bottomSheet: CartBottomSheetWidget(),
             appBar: AppBar(
               leading: Padding(
                 padding: const EdgeInsets.all(8.0),
