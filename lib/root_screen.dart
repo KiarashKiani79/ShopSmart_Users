@@ -40,7 +40,7 @@ class _RootScreenState extends State<RootScreen> {
       ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: currentScreen,
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        backgroundColor: Colors.transparent,
         height: kBottomNavigationBarHeight,
         onDestinationSelected: (index) {
           setState(() {
