@@ -1,10 +1,11 @@
+import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../consts/theme_data.dart';
 import '../providers/theme_provider.dart';
 import '../services/assets_manager.dart';
-import '../widgets/app_name_text.dart';
+import '../widgets/products/product_widget.dart';
 import '../widgets/title_text.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -56,10 +57,8 @@ class _SearchScreenState extends State<SearchScreen> {
                   prefixIcon: const Icon(Icons.search),
                   suffixIcon: GestureDetector(
                       onTap: () {
-                        setState(() {
-                          _searchController.clear();
-                          FocusScope.of(context).unfocus();
-                        });
+                        _searchController.clear();
+                        FocusScope.of(context).unfocus();
                       },
                       child: const Icon(Icons.clear)),
                 ),
@@ -69,6 +68,19 @@ class _SearchScreenState extends State<SearchScreen> {
                 onSubmitted: (value) {
                   ///
                 },
+              ),
+              const SizedBox(
+                height: 15.0,
+              ),
+              Expanded(
+                child: DynamicHeightGridView(
+                    mainAxisSpacing: 12,
+                    crossAxisSpacing: 12,
+                    builder: (context, index) {
+                      return const ProductWidget();
+                    },
+                    itemCount: 20,
+                    crossAxisCount: 2),
               ),
             ],
           ),
