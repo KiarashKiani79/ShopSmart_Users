@@ -5,6 +5,7 @@ import 'package:shopsmart_users/root_screen.dart';
 import './providers/theme_provider.dart';
 
 import 'consts/theme_data.dart';
+import 'screens/inner_screen/product_details.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,6 +33,10 @@ class MyApp extends StatelessWidget {
           theme: Styles.themeData(
               isDarkTheme: themeProvider.getIsDarkTheme, context: context),
           home: const RootScreen(),
+          routes: {
+            ProductDetailsScreen.routName: (context) =>
+                const ProductDetailsScreen(),
+          },
         );
       }),
     );

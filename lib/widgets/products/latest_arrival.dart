@@ -1,10 +1,9 @@
-import 'dart:developer';
-
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 
 import '../../consts/app_constants.dart';
+import '../../screens/inner_screen/product_details.dart';
 import '../subtitle_text.dart';
 
 class LatestArrivalProductsWidget extends StatelessWidget {
@@ -16,8 +15,11 @@ class LatestArrivalProductsWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
-        onTap: () {
-          log("ToDo add the navigate to the product details screen");
+        onTap: () async {
+          await Navigator.pushNamed(
+            context,
+            ProductDetailsScreen.routName,
+          );
         },
         child: SizedBox(
           width: size.width * 0.45,
