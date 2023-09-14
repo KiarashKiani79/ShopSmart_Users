@@ -29,6 +29,13 @@ class Styles {
           fontWeight: FontWeight.bold,
         ),
       ),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        contentPadding: const EdgeInsets.all(10),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+      ),
     );
   }
 }
@@ -38,6 +45,9 @@ SystemUiOverlayStyle statusBarTheme(ThemeProvider themeProvider) {
     statusBarColor: Colors.transparent,
     statusBarIconBrightness:
         themeProvider.getIsDarkTheme ? Brightness.light : Brightness.dark,
+    // systemNavigationBarColor:
+    //     themeProvider.getIsDarkTheme ? Colors.white : Colors.black,
+    // systemNavigationBarContrastEnforced: true,
   );
 }
 
