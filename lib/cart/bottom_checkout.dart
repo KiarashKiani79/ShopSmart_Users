@@ -22,10 +22,10 @@ class CartBottomSheetWidget extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Flexible(
+              const Flexible(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     FittedBox(
                         child: TitlesTextWidget(
                             label: "Total (6 products/9 items)")),

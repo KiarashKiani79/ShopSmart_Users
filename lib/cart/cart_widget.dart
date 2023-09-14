@@ -1,6 +1,7 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import '/cart/quantity_btm_sheet.dart';
 import '/widgets/subtitle_text.dart';
 import '/widgets/title_text.dart';
 
@@ -63,19 +64,34 @@ class CartWidget extends StatelessWidget {
                         ],
                       ),
                       Row(
-                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          // Price
                           const SubtitleTextWidget(
                             label: "16.00\$",
                             color: Colors.blue,
                           ),
                           const Spacer(),
+                          // Quantity
                           OutlinedButton.icon(
-                            onPressed: () {},
+                            onPressed: () async {
+                              await showModalBottomSheet(
+                                backgroundColor:
+                                    Theme.of(context).scaffoldBackgroundColor,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(30),
+                                    topRight: Radius.circular(30),
+                                  ),
+                                ),
+                                context: context,
+                                builder: (context) {
+                                  return const QuantityBottomSheetWidget();
+                                },
+                              );
+                            },
                             icon: const Icon(IconlyLight.arrowDown2),
                             label: const Text("Qty: 6"),
                             style: OutlinedButton.styleFrom(
-                              side: const BorderSide(width: 1),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30.0),
                               ),

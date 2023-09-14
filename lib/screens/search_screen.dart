@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import '../consts/theme_data.dart';
 import '../providers/theme_provider.dart';
 import '../services/assets_manager.dart';
 import '../widgets/app_name_text.dart';
@@ -22,11 +22,7 @@ class SearchScreen extends StatelessWidget {
           ),
         ),
         title: const AppNameTextWidget(),
-        systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: Colors.transparent,
-          statusBarIconBrightness:
-              themeProvider.getIsDarkTheme ? Brightness.light : Brightness.dark,
-        ),
+        systemOverlayStyle: statusBarTheme(themeProvider),
       ),
       body: const Center(
         child: TitlesTextWidget(label: "SearchScreen"),

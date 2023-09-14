@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:provider/provider.dart';
 
+import '../consts/theme_data.dart';
+import '../providers/theme_provider.dart';
 import '../services/assets_manager.dart';
 import '../widgets/empty_bag.dart';
 import '../widgets/title_text.dart';
@@ -12,6 +15,8 @@ class CartScreen extends StatelessWidget {
   final bool isEmpty = false;
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
+
     return isEmpty
         ? Scaffold(
             body: EmptyBagWidget(
@@ -23,7 +28,7 @@ class CartScreen extends StatelessWidget {
             ),
           )
         : Scaffold(
-            bottomSheet: CartBottomSheetWidget(),
+            bottomSheet: const CartBottomSheetWidget(),
             appBar: AppBar(
               leading: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -33,14 +38,30 @@ class CartScreen extends StatelessWidget {
               ),
               title: const TitlesTextWidget(label: "Cart (6)"),
               actions: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    IconlyBold.delete,
-                    color: Colors.red,
-                  ),
+                PopupMenuButton(
+                  itemBuilder: (ctx) => [
+                    const PopupMenuItem(
+                      value: 'clear',
+                      child: Row(
+                        children: [
+                          Icon(
+                            IconlyBold.delete,
+                            color: Colors.red,
+                          ),
+                          SizedBox(width: 4),
+                          Text('Delete All'),
+                        ],
+                      ),
+                    ),
+                  ],
+                  onSelected: (value) {
+                    if (value == 'clear') {
+                      // Call the clear method here
+                    }
+                  },
                 ),
               ],
+              systemOverlayStyle: statusBarTheme(themeProvider),
             ),
             body: ListView.builder(
                 itemCount: 10,
