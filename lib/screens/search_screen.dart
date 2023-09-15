@@ -53,6 +53,7 @@ class _SearchScreenState extends State<SearchScreen> {
               TextField(
                 controller: _searchController,
                 decoration: InputDecoration(
+                  filled: true,
                   hintText: "Search",
                   prefixIcon: const Icon(Icons.search),
                   suffixIcon: GestureDetector(
@@ -61,6 +62,12 @@ class _SearchScreenState extends State<SearchScreen> {
                         FocusScope.of(context).unfocus();
                       },
                       child: const Icon(Icons.clear)),
+                  border: const OutlineInputBorder(
+                    borderSide: BorderSide.none,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(20.0),
+                    ),
+                  ),
                 ),
                 onChanged: (value) {
                   ///

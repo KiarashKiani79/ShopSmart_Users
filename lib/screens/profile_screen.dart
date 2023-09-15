@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
+import 'package:shopsmart_users/screens/auth/login.dart';
 import 'package:shopsmart_users/services/my_app_functions.dart';
 import 'package:shopsmart_users/widgets/app_name_text.dart';
 import '../consts/theme_data.dart';
@@ -27,142 +28,150 @@ class ProfileScreen extends StatelessWidget {
         title: const AppNameTextWidget(),
         systemOverlayStyle: statusBarTheme(themeProvider),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Visibility(
-            visible: false,
-            child: Padding(
-              padding: EdgeInsets.all(18.0),
-              child: TitlesTextWidget(
-                label: "Please login to have unlimited access",
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Visibility(
+              visible: false,
+              child: Padding(
+                padding: EdgeInsets.all(18.0),
+                child: TitlesTextWidget(
+                  label: "Please login to have unlimited access",
+                ),
               ),
             ),
-          ),
-          Visibility(
-            visible: true,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              child: Row(
-                children: [
-                  Container(
-                    width: 60,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Theme.of(context).cardColor,
-                      border: Border.all(
-                          color: Theme.of(context).colorScheme.background,
-                          width: 3),
-                      image: const DecorationImage(
-                        image: NetworkImage(
-                          "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png",
+            Visibility(
+              visible: true,
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 60,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Theme.of(context).cardColor,
+                        border: Border.all(
+                            color: Theme.of(context).colorScheme.background,
+                            width: 3),
+                        image: const DecorationImage(
+                          image: NetworkImage(
+                            "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png",
+                          ),
+                          fit: BoxFit.fill,
                         ),
-                        fit: BoxFit.fill,
                       ),
                     ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TitlesTextWidget(label: "Kiarash Kiani"),
+                        SizedBox(
+                          height: 6,
+                        ),
+                        SubtitleTextWidget(label: "kiarash.kiani7997@gmail.com")
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(0.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: TitlesTextWidget(
+                      label: "General",
+                    ),
                   ),
-                  const SizedBox(
-                    width: 10,
+                  Card(
+                    elevation: 4,
+                    child: Column(
+                      children: [
+                        CustomListTile(
+                          text: "All Order",
+                          imagePath: AssetsManager.orderSvg,
+                          function: () {},
+                        ),
+                        CustomListTile(
+                          text: "Wishlist",
+                          imagePath: AssetsManager.wishlistSvg,
+                          function: () {
+                            Navigator.pushNamed(context, "/WishlistScreen");
+                          },
+                        ),
+                        CustomListTile(
+                          text: "Viewed recently",
+                          imagePath: AssetsManager.recent,
+                          function: () {
+                            Navigator.pushNamed(
+                                context, "/ViewedRecentlyScreen");
+                          },
+                        ),
+                        CustomListTile(
+                          text: "Address",
+                          imagePath: AssetsManager.address,
+                          function: () {},
+                        ),
+                      ],
+                    ),
                   ),
-                  const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      TitlesTextWidget(label: "Kiarash Kiani"),
-                      SizedBox(
-                        height: 6,
+                  const SizedBox(height: 10),
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: TitlesTextWidget(
+                      label: "Settings",
+                    ),
+                  ),
+                  Card(
+                    elevation: 4,
+                    child: SwitchListTile(
+                      secondary: Image.asset(
+                        AssetsManager.theme,
+                        height: 34,
                       ),
-                      SubtitleTextWidget(label: "kiarash.kiani7997@gmail.com")
-                    ],
-                  )
+                      title: Text(themeProvider.getIsDarkTheme
+                          ? "Dark Mode"
+                          : "Light Mode"),
+                      value: themeProvider.getIsDarkTheme,
+                      onChanged: (value) {
+                        themeProvider.setDarkTheme(themeValue: value);
+                      },
+                    ),
+                  ),
                 ],
               ),
             ),
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(0.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: TitlesTextWidget(
-                    label: "General",
-                  ),
-                ),
-                Card(
-                  child: Column(
-                    children: [
-                      CustomListTile(
-                        text: "All Order",
-                        imagePath: AssetsManager.orderSvg,
-                        function: () {},
-                      ),
-                      CustomListTile(
-                        text: "Wishlist",
-                        imagePath: AssetsManager.wishlistSvg,
-                        function: () {
-                          Navigator.pushNamed(context, "/WishlistScreen");
-                        },
-                      ),
-                      CustomListTile(
-                        text: "Viewed recently",
-                        imagePath: AssetsManager.recent,
-                        function: () {
-                          Navigator.pushNamed(context, "/ViewedRecentlyScreen");
-                        },
-                      ),
-                      CustomListTile(
-                        text: "Address",
-                        imagePath: AssetsManager.address,
-                        function: () {},
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 10),
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: TitlesTextWidget(
-                    label: "Settings",
-                  ),
-                ),
-                Card(
-                  child: SwitchListTile(
-                    secondary: Image.asset(
-                      AssetsManager.theme,
-                      height: 34,
-                    ),
-                    title: Text(themeProvider.getIsDarkTheme
-                        ? "Dark Mode"
-                        : "Light Mode"),
-                    value: themeProvider.getIsDarkTheme,
-                    onChanged: (value) {
-                      themeProvider.setDarkTheme(themeValue: value);
+            const SizedBox(height: 40),
+            Center(
+              child: ElevatedButton.icon(
+                onPressed: () async {
+                  await MyAppFunctions.showErrorOrWarningDialog(
+                    context: context,
+                    subtitle: "Are you sure you want to signout",
+                    fct: () {
+                      // Navigator.pushNamed(context, LoginScreen.routeName);
                     },
-                  ),
-                ),
-              ],
+                  );
+                },
+                icon: const Icon(Icons.login),
+                label: const Text("Login"),
+              ),
             ),
-          ),
-          const SizedBox(height: 40),
-          Center(
-            child: ElevatedButton.icon(
-              onPressed: () async {
-                await MyAppFunctions.showErrorOrWarningDialog(
-                  context: context,
-                  subtitle: "Are you sure you want to signout",
-                  fct: () {},
-                );
-              },
-              icon: const Icon(Icons.login),
-              label: const Text("Login"),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

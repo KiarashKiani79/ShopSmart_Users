@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
 
-import '../consts/theme_data.dart';
-import '../providers/theme_provider.dart';
-import '../services/assets_manager.dart';
-import '../widgets/empty_bag.dart';
-import '../widgets/title_text.dart';
+import '../../consts/theme_data.dart';
+import '../../providers/theme_provider.dart';
+import '../../services/assets_manager.dart';
+import '../../widgets/empty_bag.dart';
+import '../../widgets/title_text.dart';
 import 'bottom_checkout.dart';
 import 'cart_widget.dart';
 

@@ -4,7 +4,9 @@ import 'package:shimmer/shimmer.dart';
 import '/widgets/title_text.dart';
 
 class AppNameTextWidget extends StatelessWidget {
-  const AppNameTextWidget({super.key});
+  final double fontSize;
+
+  const AppNameTextWidget({this.fontSize = 20, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,8 +14,9 @@ class AppNameTextWidget extends StatelessWidget {
       period: const Duration(seconds: 10),
       baseColor: Colors.purple,
       highlightColor: Colors.red,
-      child: const TitlesTextWidget(
+      child: TitlesTextWidget(
         label: "Shop Smart",
+        fontSize: fontSize,
       ),
     );
   }

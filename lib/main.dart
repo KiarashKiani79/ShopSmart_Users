@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:shopsmart_users/root_screen.dart';
+import 'package:shopsmart_users/screens/auth/login.dart';
+import 'package:shopsmart_users/screens/auth/register.dart';
 import 'package:shopsmart_users/screens/inner_screen/viewed_recently.dart';
 import 'package:shopsmart_users/screens/inner_screen/wishlist.dart';
 import './providers/theme_provider.dart';
@@ -34,13 +36,16 @@ class MyApp extends StatelessWidget {
           title: 'ShopSmart',
           theme: Styles.themeData(
               isDarkTheme: themeProvider.getIsDarkTheme, context: context),
-          home: const RootScreen(),
+          // home: const RootScreen(),
+          home: const LoginScreen(),
           routes: {
             ProductDetailsScreen.routName: (context) =>
                 const ProductDetailsScreen(),
             WishlistScreen.routName: (context) => const WishlistScreen(),
             ViewedRecentlyScreen.routName: (context) =>
                 const ViewedRecentlyScreen(),
+            RegisterScreen.routName: (context) => const RegisterScreen(),
+            // LoginScreen.routeName: (context) => const LoginScreen(),
           },
         );
       }),

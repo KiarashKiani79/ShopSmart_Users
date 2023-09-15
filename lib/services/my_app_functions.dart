@@ -49,7 +49,7 @@ class MyAppFunctions {
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  fct;
                 },
                 child: SubtitleTextWidget(
                   label: buttonText,
