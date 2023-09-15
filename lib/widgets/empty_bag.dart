@@ -16,58 +16,71 @@ class EmptyBagWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return SingleChildScrollView(
-      physics: const BouncingScrollPhysics(),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const SizedBox(
-            height: 40,
-          ),
-          Image.asset(
-            imagePath,
-            width: double.infinity,
-            height: size.height * 0.35,
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          const TitlesTextWidget(
-            label: "Whoops!",
-            fontSize: 40,
-            color: Colors.red,
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          SubtitleTextWidget(
-            label: title,
-            fontWeight: FontWeight.w600,
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SubtitleTextWidget(
-              label: subtitle,
-              fontWeight: FontWeight.w400,
-              color: Colors.grey,
+    return Scaffold(
+      appBar: AppBar(
+        leading: Navigator.canPop(context)
+            ? IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(
+                  Icons.arrow_back_ios,
+                  size: 20,
+                ),
+              )
+            : null,
+      ),
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // const SizedBox(
+            //   height: 40,
+            // ),
+            Image.asset(
+              imagePath,
+              width: double.infinity,
+              height: size.height * 0.35,
             ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-                elevation: 0,
-                backgroundColor: Colors.red,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 15)),
-            onPressed: () {},
-            child: Text(buttonText),
-          ),
-        ],
+            const SizedBox(
+              height: 20,
+            ),
+            const TitlesTextWidget(
+              label: "Whoops!",
+              fontSize: 40,
+              color: Colors.red,
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            SubtitleTextWidget(
+              label: title,
+              fontWeight: FontWeight.w600,
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SubtitleTextWidget(
+                label: subtitle,
+                fontWeight: FontWeight.w400,
+                color: Colors.grey,
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 15)),
+              onPressed: () {},
+              child: Text(buttonText),
+            ),
+          ],
+        ),
       ),
     );
   }

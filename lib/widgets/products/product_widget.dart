@@ -1,6 +1,5 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
 import '../../screens/inner_screen/product_details.dart';
 import '/widgets/subtitle_text.dart';
 import '/widgets/title_text.dart';
@@ -50,7 +49,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                       maxLines: 2,
                     ),
                   ),
-                  // like button
+                  // heart button
                   const Flexible(
                     flex: 2,
                     child: HeartButtonWidget(),
@@ -76,13 +75,20 @@ class _ProductWidgetState extends State<ProductWidget> {
                   ),
                   // add cart button
                   Flexible(
-                    child: IconButton.outlined(
+                    child: IconButton(
                       highlightColor: Colors.blue,
                       onPressed: () {},
-                      icon: const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 6),
-                        child: Icon(Icons.add_shopping_cart_outlined),
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(
+                          Colors.blue.withOpacity(.3),
+                        ),
+                        shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                        ),
                       ),
+                      icon: const Icon(Icons.add_shopping_cart_outlined),
                     ),
                   ),
                 ],

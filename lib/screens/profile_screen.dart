@@ -103,12 +103,16 @@ class ProfileScreen extends StatelessWidget {
                       CustomListTile(
                         text: "Wishlist",
                         imagePath: AssetsManager.wishlistSvg,
-                        function: () {},
+                        function: () {
+                          Navigator.pushNamed(context, "/WishlistScreen");
+                        },
                       ),
                       CustomListTile(
                         text: "Viewed recently",
                         imagePath: AssetsManager.recent,
-                        function: () {},
+                        function: () {
+                          Navigator.pushNamed(context, "/ViewedRecentlyScreen");
+                        },
                       ),
                       CustomListTile(
                         text: "Address",
