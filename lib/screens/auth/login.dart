@@ -83,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         TitlesTextWidget(label: "Welcome back!"),
                         FittedBox(
                           child: SubtitleTextWidget(
-                              label: ' Access your account to get started.'),
+                              label: 'Access your account to get started.'),
                         ),
                       ],
                     )),

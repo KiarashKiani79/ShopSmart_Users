@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import '../../providers/theme_provider.dart';
+import '../../widgets/auth/image_picker_widget.dart';
 import '/consts/validator.dart';
 import '/widgets/app_name_text.dart';
 import '/widgets/subtitle_text.dart';
@@ -16,7 +20,9 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  final _formkey = GlobalKey<FormState>();
   bool obscureText = true;
+  XFile? _pickedImage;
   late final TextEditingController _nameController,
       _emailController,
       _passwordController,
@@ -27,7 +33,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
       _passwordFocusNode,
       _repeatPasswordFocusNode;
 
-  final _formkey = GlobalKey<FormState>();
   @override
   void initState() {
     _nameController = TextEditingController();
@@ -66,7 +71,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
-
+    final size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -103,6 +108,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 const SizedBox(
                   height: 30,
                 ),
+                SizedBox(
+                  height: size.width * 0.3,
+                  width: size.width * 0.3,
+                  child: PickImageWidget(
+                    pickedImage: _pickedImage,
+                    function: () {},
+                  ),
+                ),
+
+                const SizedBox(
+                  height: 30,
+                ),
                 Form(
                   key: _formkey,
                   child: Column(
@@ -116,7 +133,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         decoration: const InputDecoration(
                           label: Text("Full Name"),
                           prefixIcon: Icon(
-                            Icons.person,
+                            IconlyLight.profile,
                           ),
                         ),
                         onFieldSubmitted: (value) {
