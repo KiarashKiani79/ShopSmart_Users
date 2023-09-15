@@ -5,9 +5,10 @@ class HeartButtonWidget extends StatefulWidget {
   const HeartButtonWidget({
     super.key,
     this.bkgColor = Colors.transparent,
-    this.size = 20,
+    this.size = 24,
   });
   final Color bkgColor;
+
   final double size;
   @override
   State<HeartButtonWidget> createState() => _HeartButtonWidgetState();
@@ -27,7 +28,6 @@ class _HeartButtonWidgetState extends State<HeartButtonWidget> {
         icon: Icon(
           IconlyLight.heart,
           size: widget.size,
-          color: Colors.redAccent,
         ),
       ),
     );

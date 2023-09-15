@@ -4,6 +4,7 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import '../../screens/inner_screen/product_details.dart';
 import '/widgets/subtitle_text.dart';
 import '/widgets/title_text.dart';
+import 'heart_btn.dart';
 
 class ProductWidget extends StatefulWidget {
   const ProductWidget({super.key});
@@ -50,12 +51,9 @@ class _ProductWidgetState extends State<ProductWidget> {
                     ),
                   ),
                   // like button
-                  Flexible(
+                  const Flexible(
                     flex: 2,
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(IconlyLight.heart),
-                    ),
+                    child: HeartButtonWidget(),
                   ),
                 ],
               ),

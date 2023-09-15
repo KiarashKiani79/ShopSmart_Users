@@ -1,10 +1,10 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
 
 import '../../consts/app_constants.dart';
 import '../../screens/inner_screen/product_details.dart';
 import '../subtitle_text.dart';
+import 'heart_btn.dart';
 
 class LatestArrivalProductsWidget extends StatelessWidget {
   const LatestArrivalProductsWidget({super.key});
@@ -27,6 +27,7 @@ class LatestArrivalProductsWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Flexible(
+                // image
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12.0),
                   child: FancyShimmerImage(
@@ -45,6 +46,7 @@ class LatestArrivalProductsWidget extends StatelessWidget {
                     const SizedBox(
                       height: 5,
                     ),
+                    // title
                     Text(
                       "Title" * 15,
                       maxLines: 2,
@@ -53,12 +55,9 @@ class LatestArrivalProductsWidget extends StatelessWidget {
                     FittedBox(
                       child: Row(
                         children: [
-                          IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              IconlyLight.heart,
-                            ),
-                          ),
+                          // heart button
+                          const HeartButtonWidget(),
+                          // cart button
                           IconButton(
                             onPressed: () {},
                             icon: const Icon(
@@ -68,6 +67,7 @@ class LatestArrivalProductsWidget extends StatelessWidget {
                         ],
                       ),
                     ),
+                    // price
                     const FittedBox(
                       child: SubtitleTextWidget(
                         label: "150.00\$",

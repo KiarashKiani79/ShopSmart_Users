@@ -94,7 +94,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       children: [
                         // heart button
                         HeartButtonWidget(
-                          bkgColor: Colors.redAccent.withOpacity(0.2),
+                          bkgColor: Colors.pink.withOpacity(0.30),
                         ),
                         const SizedBox(
                           width: 20,

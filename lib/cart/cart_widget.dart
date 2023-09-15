@@ -1,6 +1,7 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import '../widgets/products/heart_btn.dart';
 import '/cart/quantity_btm_sheet.dart';
 import '/widgets/subtitle_text.dart';
 import '/widgets/title_text.dart';
@@ -20,6 +21,7 @@ class CartWidget extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // image
                 ClipRRect(
                   borderRadius: BorderRadius.circular(12.0),
                   child: FancyShimmerImage(
@@ -37,6 +39,7 @@ class CartWidget extends StatelessWidget {
                     children: [
                       Row(
                         children: [
+                          // title
                           SizedBox(
                             width: size.width * 0.6,
                             child: TitlesTextWidget(
@@ -46,6 +49,7 @@ class CartWidget extends StatelessWidget {
                           ),
                           Column(
                             children: [
+                              // remove button
                               IconButton(
                                 onPressed: () {},
                                 icon: const Icon(
@@ -53,12 +57,8 @@ class CartWidget extends StatelessWidget {
                                   color: Colors.redAccent,
                                 ),
                               ),
-                              IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  IconlyLight.heart,
-                                ),
-                              ),
+                              // heart button
+                              const HeartButtonWidget(),
                             ],
                           ),
                         ],
