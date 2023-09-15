@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:shopsmart_users/services/my_app_functions.dart';
 import '../../providers/theme_provider.dart';
 import '../../widgets/auth/image_picker_widget.dart';
 import '/consts/validator.dart';
@@ -113,7 +114,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   width: size.width * 0.3,
                   child: PickImageWidget(
                     pickedImage: _pickedImage,
-                    function: () {},
+                    function: () {
+                      MyAppFunctions.imagePickerDialog(
+                        context: context,
+                        cameraFCT: () {},
+                        galleryFCT: () {},
+                        removeFCT: () {},
+                      );
+                    },
                   ),
                 ),
 
