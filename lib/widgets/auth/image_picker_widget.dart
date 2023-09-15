@@ -29,7 +29,7 @@ class PickImageWidget extends StatelessWidget {
                   )
                 : Image.file(
                     File(pickedImage!.path),
-                    fit: BoxFit.fill,
+                    fit: BoxFit.cover,
                   ),
           ),
         ),
