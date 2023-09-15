@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
+import 'package:shopsmart_users/services/my_app_functions.dart';
 import 'package:shopsmart_users/widgets/app_name_text.dart';
 import '../consts/theme_data.dart';
 import '/services/assets_manager.dart';
@@ -150,7 +151,13 @@ class ProfileScreen extends StatelessWidget {
           const SizedBox(height: 40),
           Center(
             child: ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () async {
+                await MyAppFunctions.showErrorOrWarningDialog(
+                  context: context,
+                  subtitle: "Are you sure you want to signout",
+                  fct: () {},
+                );
+              },
               icon: const Icon(Icons.login),
               label: const Text("Login"),
             ),
