@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../consts/theme_data.dart';
+import '../providers/products_provider.dart';
 import '../providers/theme_provider.dart';
 import '../services/assets_manager.dart';
 import '../widgets/products/product_widget.dart';
@@ -33,6 +34,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
+    final productsProvider = Provider.of<ProductsProvider>(context);
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -84,9 +86,12 @@ class _SearchScreenState extends State<SearchScreen> {
                     mainAxisSpacing: 12,
                     crossAxisSpacing: 12,
                     builder: (context, index) {
-                      return const ProductWidget();
+                      return ProductWidget(
+                        productId:
+                            productsProvider.getProducts[index].productId,
+                      );
                     },
-                    itemCount: 20,
+                    itemCount: productsProvider.getProducts.length,
                     crossAxisCount: 2),
               ),
             ],
