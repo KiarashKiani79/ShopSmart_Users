@@ -20,17 +20,17 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  late TextEditingController _searchController;
-
+  late TextEditingController searchTextController;
+  List<ProductModel> productListSearch = [];
   @override
   void initState() {
-    _searchController = TextEditingController();
+    searchTextController = TextEditingController();
     super.initState();
   }
 
   @override
   void dispose() {
-    _searchController.dispose();
+    searchTextController.dispose();
     super.dispose();
   }
 
@@ -38,8 +38,7 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
     final productsProvider = Provider.of<ProductsProvider>(context);
-    // String? passedCategory =
-    //     ModalRoute.of(context)!.settings.arguments as String?;
+
     Map<String, String>? passedCategory =
         ModalRoute.of(context)!.settings.arguments as Map<String, String>?;
     String? passedCategoryName = passedCategory?['name'];
@@ -69,29 +68,30 @@ class _SearchScreenState extends State<SearchScreen> {
         body: productList.isEmpty
             ? const Center(
                 child: FittedBox(
-                child: Column(
-                  children: [
-                    TitlesTextWidget(label: "No Product Found", fontSize: 22),
-                    Icon(
-                      Ionicons.sad_outline,
-                      size: 28,
-                    ),
-                  ],
+                  child: Column(
+                    children: [
+                      TitlesTextWidget(label: "No Product Found", fontSize: 22),
+                      Icon(
+                        Ionicons.sad_outline,
+                        size: 28,
+                      ),
+                    ],
+                  ),
                 ),
-              ))
+              )
             : Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
                     TextField(
-                      controller: _searchController,
+                      controller: searchTextController,
                       decoration: InputDecoration(
                         filled: true,
                         hintText: "Search",
                         prefixIcon: const Icon(Icons.search),
                         suffixIcon: GestureDetector(
                             onTap: () {
-                              _searchController.clear();
+                              searchTextController.clear();
                               FocusScope.of(context).unfocus();
                             },
                             child: const Icon(Icons.clear)),
@@ -103,27 +103,55 @@ class _SearchScreenState extends State<SearchScreen> {
                         ),
                       ),
                       onChanged: (value) {
-                        ///
+                        setState(() {
+                          productListSearch = productsProvider.searchQuery(
+                              searchText: searchTextController.text);
+                        });
                       },
                       onSubmitted: (value) {
-                        ///
+                        setState(() {
+                          productListSearch = productsProvider.searchQuery(
+                              searchText: searchTextController.text);
+                        });
                       },
                     ),
                     const SizedBox(
                       height: 15.0,
                     ),
+                    if (searchTextController.text.isNotEmpty &&
+                        productListSearch.isEmpty) ...[
+                      const Center(
+                        child: FittedBox(
+                          child: Column(
+                            children: [
+                              TitlesTextWidget(
+                                  label: "No Product Found", fontSize: 22),
+                              Icon(
+                                Ionicons.sad_outline,
+                                size: 28,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                     Expanded(
                       child: DynamicHeightGridView(
-                          mainAxisSpacing: 12,
-                          crossAxisSpacing: 12,
-                          builder: (context, index) {
-                            return ProductWidget(
-                              productId: productList[index].productId,
-                            );
-                          },
-                          itemCount: productList.length,
-                          crossAxisCount: 2),
-                    ),
+                        itemCount: searchTextController.text.isNotEmpty
+                            ? productListSearch.length
+                            : productList.length,
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 12,
+                        crossAxisSpacing: 12,
+                        builder: (context, index) {
+                          return ProductWidget(
+                            productId: searchTextController.text.isNotEmpty
+                                ? productListSearch[index].productId
+                                : productList[index].productId,
+                          );
+                        },
+                      ),
+                    )
                   ],
                 ),
               ),
