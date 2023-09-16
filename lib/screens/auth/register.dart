@@ -1,10 +1,9 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:shopsmart_users/services/my_app_functions.dart';
+import '../../consts/theme_data.dart';
 import '../../providers/theme_provider.dart';
 import '../../widgets/auth/image_picker_widget.dart';
 import '/consts/validator.dart';
@@ -98,15 +97,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () {
+              Navigator.canPop(context) ? Navigator.pop(context) : null;
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              size: 20,
+            ),
+          ),
+          systemOverlayStyle: statusBarTheme(themeProvider),
+        ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: SingleChildScrollView(
             child: Column(
               children: [
-                // const BackButton(),
-                const SizedBox(
-                  height: 60,
-                ),
                 const AppNameTextWidget(
                   fontSize: 30,
                 ),
@@ -139,7 +146,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     },
                   ),
                 ),
-
                 const SizedBox(
                   height: 30,
                 ),

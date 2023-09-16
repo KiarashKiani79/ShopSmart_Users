@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
-import 'package:shopsmart_users/screens/auth/login.dart';
-import 'package:shopsmart_users/services/my_app_functions.dart';
+import 'package:shopsmart_users/screens/inner_screen/orders/orders_screen.dart';
+import 'package:shopsmart_users/screens/inner_screen/viewed_recently.dart';
+import 'package:shopsmart_users/screens/inner_screen/wishlist.dart';
 import 'package:shopsmart_users/widgets/app_name_text.dart';
 import '../consts/theme_data.dart';
 import '/services/assets_manager.dart';
@@ -10,6 +11,7 @@ import '/widgets/subtitle_text.dart';
 
 import '../providers/theme_provider.dart';
 import '../widgets/title_text.dart';
+import 'auth/login.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -103,13 +105,15 @@ class ProfileScreen extends StatelessWidget {
                         CustomListTile(
                           text: "All Order",
                           imagePath: AssetsManager.orderSvg,
-                          function: () {},
+                          function: () => Navigator.pushNamed(
+                              context, OrdersScreen.routeName),
                         ),
                         CustomListTile(
                           text: "Wishlist",
                           imagePath: AssetsManager.wishlistSvg,
                           function: () {
-                            Navigator.pushNamed(context, "/WishlistScreen");
+                            Navigator.pushNamed(
+                                context, WishlistScreen.routName);
                           },
                         ),
                         CustomListTile(
@@ -117,7 +121,7 @@ class ProfileScreen extends StatelessWidget {
                           imagePath: AssetsManager.recent,
                           function: () {
                             Navigator.pushNamed(
-                                context, "/ViewedRecentlyScreen");
+                                context, ViewedRecentlyScreen.routName);
                           },
                         ),
                         CustomListTile(
@@ -158,14 +162,23 @@ class ProfileScreen extends StatelessWidget {
             Center(
               child: ElevatedButton.icon(
                 onPressed: () async {
-                  await MyAppFunctions.showErrorOrWarningDialog(
-                    context: context,
-                    subtitle: "Are you sure you want to signout",
-                    fct: () {
-                      // Navigator.pushNamed(context, LoginScreen.routeName);
-                    },
-                  );
+                  Navigator.pushNamed(context, LoginScreen.routName);
+
+                  // await MyAppFunctions.showErrorOrWarningDialog(
+                  //   context: context,
+                  //   subtitle: "Are you sure you want to signout",
+                  //   fct: () {
+                  //   },
+                  // );
                 },
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.all(12.0),
+                  foregroundColor: themeProvider.getIsDarkTheme
+                      ? Colors.black
+                      : Colors.white,
+                  elevation: 6,
+                  backgroundColor: Colors.red,
+                ),
                 icon: const Icon(Icons.login),
                 label: const Text("Login"),
               ),

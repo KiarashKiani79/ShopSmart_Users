@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
+import 'package:shopsmart_users/root_screen.dart';
+import 'package:shopsmart_users/screens/auth/forgot_password.dart';
+import '../../consts/theme_data.dart';
 import '../../providers/theme_provider.dart';
 import '/consts/validator.dart';
 import '/screens/auth/register.dart';
@@ -11,6 +14,7 @@ import '/widgets/title_text.dart';
 import '../../widgets/auth/google_btn.dart';
 
 class LoginScreen extends StatefulWidget {
+  static const routName = '/login-screen';
   const LoginScreen({super.key});
 
   @override
@@ -61,14 +65,23 @@ class _LoginScreenState extends State<LoginScreen> {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () {
+              Navigator.canPop(context) ? Navigator.pop(context) : null;
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              size: 20,
+            ),
+          ),
+          systemOverlayStyle: statusBarTheme(themeProvider),
+        ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: SingleChildScrollView(
             child: Column(
               children: [
-                const SizedBox(
-                  height: 60,
-                ),
                 const AppNameTextWidget(
                   fontSize: 30,
                 ),
@@ -151,7 +164,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       Align(
                         alignment: Alignment.centerRight,
                         child: TextButton(
-                          onPressed: () {},
+                          onPressed: () => Navigator.of(context)
+                              .pushNamed(ForgotPasswordScreen.routeName),
                           child: const SubtitleTextWidget(
                             label: "Forgot password?",
                             fontStyle: FontStyle.italic,
@@ -234,7 +248,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                     label: "Guest?",
                                     fontWeight: FontWeight.w500,
                                   ),
-                                  onPressed: () async {},
+                                  onPressed: () async {
+                                    Navigator.pushReplacementNamed(
+                                        context, RootScreen.routName);
+                                  },
                                 ),
                               ),
                             ),
