@@ -7,7 +7,6 @@ import '../../providers/theme_provider.dart';
 import '../../widgets/products/heart_btn.dart';
 import '/widgets/title_text.dart';
 
-import '../../consts/app_constants.dart';
 import '../../widgets/app_name_text.dart';
 // import '../../widgets/products/heart_btn.dart';
 import '../../widgets/subtitle_text.dart';
