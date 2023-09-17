@@ -3,6 +3,7 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
 
 import '../../consts/theme_data.dart';
+import '../../providers/cart_provider.dart';
 import '../../providers/theme_provider.dart';
 import '../../services/assets_manager.dart';
 import '../../widgets/empty_bag.dart';
@@ -12,12 +13,12 @@ import 'cart_widget.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
-  final bool isEmpty = false;
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
+    final cartProvider = Provider.of<CartProvider>(context);
 
-    return isEmpty
+    return cartProvider.getCartitems.isEmpty
         ? Scaffold(
             body: EmptyBagWidget(
               imagePath: AssetsManager.shoppingBasket,
@@ -36,7 +37,8 @@ class CartScreen extends StatelessWidget {
                   AssetsManager.shoppingCart,
                 ),
               ),
-              title: const TitlesTextWidget(label: "Cart (6)"),
+              title: TitlesTextWidget(
+                  label: "Cart (${cartProvider.getCartitems.length})"),
               actions: [
                 PopupMenuButton(
                   itemBuilder: (ctx) => [
@@ -63,11 +65,21 @@ class CartScreen extends StatelessWidget {
               ],
               systemOverlayStyle: statusBarTheme(themeProvider),
             ),
-            body: ListView.builder(
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return const CartWidget();
-                }),
+            body: Column(
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                      itemCount: cartProvider.getCartitems.length,
+                      itemBuilder: (context, index) {
+                        return ChangeNotifierProvider.value(
+                            value: cartProvider.getCartitems.values
+                                .toList()[index],
+                            child: const CartWidget());
+                      }),
+                ),
+                const SizedBox(height: kBottomNavigationBarHeight + 30),
+              ],
+            ),
           );
   }
 }

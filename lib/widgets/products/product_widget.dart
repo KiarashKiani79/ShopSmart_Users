@@ -1,6 +1,9 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
+import '../../providers/cart_provider.dart';
 import '../../providers/products_provider.dart';
 import '../../screens/inner_screen/product_details.dart';
 import '/widgets/subtitle_text.dart';
@@ -25,6 +28,7 @@ class _ProductWidgetState extends State<ProductWidget> {
     Size size = MediaQuery.of(context).size;
     final productsProvider = Provider.of<ProductsProvider>(context);
     final getCurrProduct = productsProvider.findByProdId(widget.productId);
+    final cartProvider = Provider.of<CartProvider>(context);
     return getCurrProduct == null
         ? const SizedBox.shrink()
         : Padding(
@@ -92,7 +96,14 @@ class _ProductWidgetState extends State<ProductWidget> {
                         Flexible(
                           child: IconButton(
                             highlightColor: Colors.blue,
-                            onPressed: () {},
+                            onPressed: () {
+                              if (cartProvider.isProdinCart(
+                                  productId: getCurrProduct.productId)) {
+                                return;
+                              }
+                              cartProvider.addProductToCart(
+                                  productId: getCurrProduct.productId);
+                            },
                             style: ButtonStyle(
                               backgroundColor: MaterialStatePropertyAll(
                                 Colors.blue.withOpacity(.3),
@@ -103,7 +114,12 @@ class _ProductWidgetState extends State<ProductWidget> {
                                 ),
                               ),
                             ),
-                            icon: const Icon(Icons.add_shopping_cart_outlined),
+                            icon: Icon(
+                              cartProvider.isProdinCart(
+                                      productId: getCurrProduct.productId)
+                                  ? Ionicons.checkmark_done
+                                  : Icons.add_shopping_cart_outlined,
+                            ),
                           ),
                         ),
                       ],

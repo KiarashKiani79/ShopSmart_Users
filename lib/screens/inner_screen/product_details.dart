@@ -1,14 +1,15 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
 import 'package:shopsmart_users/consts/theme_data.dart';
+import '../../providers/cart_provider.dart';
 import '../../providers/products_provider.dart';
 import '../../providers/theme_provider.dart';
 import '../../widgets/products/heart_btn.dart';
 import '/widgets/title_text.dart';
 
 import '../../widgets/app_name_text.dart';
-// import '../../widgets/products/heart_btn.dart';
 import '../../widgets/subtitle_text.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
@@ -27,6 +28,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     final productsProvider = Provider.of<ProductsProvider>(context);
     final productId = ModalRoute.of(context)!.settings.arguments as String;
     final getCurrProduct = productsProvider.findByProdId(productId);
+    final cartProvider = Provider.of<CartProvider>(context);
     return Scaffold(
       // appBar
       appBar: AppBar(
@@ -109,18 +111,35 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                 child: SizedBox(
                                   height: kBottomNavigationBarHeight - 10,
                                   child: ElevatedButton.icon(
-                                    icon: const Icon(
-                                      Icons.add_shopping_cart,
+                                    icon: Icon(
+                                      cartProvider.isProdinCart(
+                                              productId:
+                                                  getCurrProduct.productId)
+                                          ? Ionicons.checkmark_done
+                                          : Icons.add_shopping_cart_outlined,
                                       color: Colors.white,
                                     ),
-                                    label: const Text(
-                                      "Add to Cart",
-                                      style: TextStyle(color: Colors.white),
+                                    label: Text(
+                                      cartProvider.isProdinCart(
+                                              productId:
+                                                  getCurrProduct.productId)
+                                          ? "In Cart"
+                                          : "Add To Cart",
+                                      style:
+                                          const TextStyle(color: Colors.white),
                                     ),
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: Colors.red,
                                     ),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      if (cartProvider.isProdinCart(
+                                          productId:
+                                              getCurrProduct.productId)) {
+                                        return;
+                                      }
+                                      cartProvider.addProductToCart(
+                                          productId: getCurrProduct.productId);
+                                    },
                                   ),
                                 ),
                               ),

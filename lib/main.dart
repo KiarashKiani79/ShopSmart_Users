@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:shopsmart_users/providers/products_provider.dart';
-import 'package:shopsmart_users/screens/auth/forgot_password.dart';
-import 'package:shopsmart_users/screens/inner_screen/orders/orders_screen.dart';
-import 'package:shopsmart_users/screens/search_screen.dart';
+import 'consts/theme_data.dart';
+import '/providers/cart_provider.dart';
+import './providers/theme_provider.dart';
+import '/providers/products_provider.dart';
 import '/root_screen.dart';
+import '/screens/auth/forgot_password.dart';
+import '/screens/search_screen.dart';
 import '/screens/auth/login.dart';
 import '/screens/auth/register.dart';
+import '/screens/inner_screen/orders/orders_screen.dart';
 import '/screens/inner_screen/viewed_recently.dart';
 import '/screens/inner_screen/wishlist.dart';
-import './providers/theme_provider.dart';
-
-import 'consts/theme_data.dart';
 import 'screens/inner_screen/product_details.dart';
 
 void main() {
@@ -35,6 +35,9 @@ class MyApp extends StatelessWidget {
         }),
         ChangeNotifierProvider(create: (_) {
           return ProductsProvider();
+        }),
+        ChangeNotifierProvider(create: (_) {
+          return CartProvider();
         }),
       ],
       child: Consumer<ThemeProvider>(builder: (context, themeProvider, child) {
