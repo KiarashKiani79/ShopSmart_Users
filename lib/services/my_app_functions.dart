@@ -51,7 +51,8 @@ class MyAppFunctions {
               ),
               TextButton(
                 onPressed: () {
-                  fct;
+                  fct();
+                  Navigator.pop(context);
                 },
                 child: SubtitleTextWidget(
                   label: buttonText,

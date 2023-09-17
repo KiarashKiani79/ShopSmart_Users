@@ -6,6 +6,7 @@ import '../../consts/theme_data.dart';
 import '../../providers/cart_provider.dart';
 import '../../providers/theme_provider.dart';
 import '../../services/assets_manager.dart';
+import '../../services/my_app_functions.dart';
 import '../../widgets/empty_bag.dart';
 import '../../widgets/title_text.dart';
 import 'bottom_checkout.dart';
@@ -58,7 +59,14 @@ class CartScreen extends StatelessWidget {
                   ],
                   onSelected: (value) {
                     if (value == 'clear') {
-                      // Call the clear method here
+                      MyAppFunctions.showErrorOrWarningDialog(
+                        isError: false,
+                        context: context,
+                        subtitle: "Clear Cart?",
+                        fct: () {
+                          cartProvider.clearLocalCart();
+                        },
+                      );
                     }
                   },
                 ),

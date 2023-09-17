@@ -55,4 +55,14 @@ class CartProvider with ChangeNotifier {
     });
     return total;
   }
+
+  void clearLocalCart() {
+    _cartItems.clear();
+    notifyListeners();
+  }
+
+  void removeOneItem({required String productId}) {
+    _cartItems.remove(productId);
+    notifyListeners();
+  }
 }
