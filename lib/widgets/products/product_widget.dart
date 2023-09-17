@@ -1,10 +1,10 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
 import '../../providers/cart_provider.dart';
 import '../../providers/products_provider.dart';
+import '../../providers/viewed_recently_provider.dart';
 import '../../screens/inner_screen/product_details.dart';
 import '/widgets/subtitle_text.dart';
 import '/widgets/title_text.dart';
@@ -29,12 +29,15 @@ class _ProductWidgetState extends State<ProductWidget> {
     final productsProvider = Provider.of<ProductsProvider>(context);
     final getCurrProduct = productsProvider.findByProdId(widget.productId);
     final cartProvider = Provider.of<CartProvider>(context);
+    final viewedProdProvider = Provider.of<ViewedProdProvider>(context);
     return getCurrProduct == null
         ? const SizedBox.shrink()
         : Padding(
             padding: const EdgeInsets.all(0.0),
             child: GestureDetector(
               onTap: () async {
+                viewedProdProvider.addViewedProd(
+                    productId: getCurrProduct.productId);
                 await Navigator.pushNamed(
                   context,
                   ProductDetailsScreen.routName,
@@ -58,6 +61,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                   Padding(
                     padding: const EdgeInsets.all(2.0),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         // title
                         Flexible(
@@ -69,9 +73,11 @@ class _ProductWidgetState extends State<ProductWidget> {
                           ),
                         ),
                         // heart button
-                        const Flexible(
+                        Flexible(
                           flex: 2,
-                          child: HeartButtonWidget(),
+                          child: HeartButtonWidget(
+                            productId: getCurrProduct.productId,
+                          ),
                         ),
                       ],
                     ),
@@ -86,10 +92,12 @@ class _ProductWidgetState extends State<ProductWidget> {
                       children: [
                         // price
                         Flexible(
-                          child: SubtitleTextWidget(
-                            label: "${getCurrProduct.productPrice}\$",
-                            fontWeight: FontWeight.w600,
-                            color: Colors.blue,
+                          child: FittedBox(
+                            child: SubtitleTextWidget(
+                              label: "${getCurrProduct.productPrice}\$",
+                              fontWeight: FontWeight.w600,
+                              color: Colors.blue,
+                            ),
                           ),
                         ),
                         // add cart button

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:shopsmart_users/providers/viewed_recently_provider.dart';
+import 'package:shopsmart_users/providers/wishlist_provider.dart';
 import 'consts/theme_data.dart';
 import '/providers/cart_provider.dart';
 import './providers/theme_provider.dart';
@@ -38,6 +40,12 @@ class MyApp extends StatelessWidget {
         }),
         ChangeNotifierProvider(create: (_) {
           return CartProvider();
+        }),
+        ChangeNotifierProvider(create: (_) {
+          return WishlistProvider();
+        }),
+        ChangeNotifierProvider(create: (_) {
+          return ViewedProdProvider();
         }),
       ],
       child: Consumer<ThemeProvider>(builder: (context, themeProvider, child) {

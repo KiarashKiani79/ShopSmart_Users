@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shopsmart_users/root_screen.dart';
+import 'package:shopsmart_users/screens/search_screen.dart';
 
 import 'subtitle_text.dart';
 import 'title_text.dart';
@@ -12,7 +14,8 @@ class EmptyBagWidget extends StatelessWidget {
     required this.buttonText,
   });
 
-  final String imagePath, title, subtitle, buttonText;
+  final String imagePath, title, subtitle;
+  final String? buttonText;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -64,18 +67,23 @@ class EmptyBagWidget extends StatelessWidget {
                 label: subtitle,
                 fontWeight: FontWeight.w400,
                 color: Colors.grey,
+                textAlign: TextAlign.center,
               ),
             ),
             const SizedBox(
               height: 20,
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 15)),
-              onPressed: () {},
-              child: Text(buttonText),
-            ),
+            buttonText == null
+                ? Container()
+                : ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 15)),
+                    onPressed: () {
+                      Navigator.pushNamed(context, RootScreen.routName);
+                    },
+                    child: Text(buttonText!),
+                  ),
           ],
         ),
       ),

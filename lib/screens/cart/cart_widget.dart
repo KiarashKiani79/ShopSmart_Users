@@ -71,7 +71,9 @@ class CartWidget extends StatelessWidget {
                                       ),
                                     ),
                                     // heart button
-                                    const HeartButtonWidget(),
+                                    HeartButtonWidget(
+                                      productId: getCurrProduct.productId,
+                                    ),
                                   ],
                                 ),
                               ],

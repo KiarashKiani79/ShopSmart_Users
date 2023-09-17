@@ -91,6 +91,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 label:
                     'Please enter the email address you\'d like your password reset information sent to',
                 fontSize: 14,
+                color: Colors.grey,
               ),
               const SizedBox(
                 height: 40,

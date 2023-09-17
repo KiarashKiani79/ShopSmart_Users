@@ -96,6 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         TitlesTextWidget(label: "Welcome back!"),
                         FittedBox(
                           child: SubtitleTextWidget(
+                              color: Colors.grey,
                               label: 'Access your account to get started.'),
                         ),
                       ],

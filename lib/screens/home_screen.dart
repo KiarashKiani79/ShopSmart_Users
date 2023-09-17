@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../consts/app_constants.dart';
 import '../consts/theme_data.dart';
+import '../providers/products_provider.dart';
 import '../providers/theme_provider.dart';
 import '../services/assets_manager.dart';
 import '../widgets/app_name_text.dart';
@@ -18,6 +19,8 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
+    final productsProvider = Provider.of<ProductsProvider>(context);
+
     return Scaffold(
       // appBar
       appBar: AppBar(
@@ -60,7 +63,9 @@ class HomeScreen extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     itemCount: 10,
                     itemBuilder: (context, index) {
-                      return const LatestArrivalProductsWidget();
+                      return ChangeNotifierProvider.value(
+                          value: productsProvider.getProducts[index],
+                          child: const LatestArrivalProductsWidget());
                     }),
               ),
               // Categories title

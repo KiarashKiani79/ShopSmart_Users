@@ -1,7 +1,12 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
+import 'package:ionicons/ionicons.dart';
+import 'package:provider/provider.dart';
+import 'package:shopsmart_users/models/product_model.dart';
+import 'package:shopsmart_users/providers/cart_provider.dart';
+import 'package:shopsmart_users/providers/viewed_recently_provider.dart';
+import 'package:shopsmart_users/providers/wishlist_provider.dart';
 
-import '../../consts/app_constants.dart';
 import '../../screens/inner_screen/product_details.dart';
 import '../subtitle_text.dart';
 import 'heart_btn.dart';
@@ -12,13 +17,19 @@ class LatestArrivalProductsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    final productsModel = Provider.of<ProductModel>(context);
+    final cartProvider = Provider.of<CartProvider>(context);
+    final viewedProdProvider = Provider.of<ViewedProdProvider>(context);
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
         onTap: () async {
+          viewedProdProvider.addViewedProd(productId: productsModel.productId);
           await Navigator.pushNamed(
             context,
             ProductDetailsScreen.routName,
+            arguments: productsModel.productId,
           );
         },
         child: SizedBox(
@@ -31,7 +42,7 @@ class LatestArrivalProductsWidget extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12.0),
                   child: FancyShimmerImage(
-                    imageUrl: AppConstants.imageUrl,
+                    imageUrl: productsModel.productImage,
                     height: size.width * 0.24,
                     width: size.width * 0.32,
                   ),
@@ -48,7 +59,7 @@ class LatestArrivalProductsWidget extends StatelessWidget {
                     ),
                     // title
                     Text(
-                      "Title" * 15,
+                      productsModel.productTitle,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -56,21 +67,33 @@ class LatestArrivalProductsWidget extends StatelessWidget {
                       child: Row(
                         children: [
                           // heart button
-                          const HeartButtonWidget(),
+                          HeartButtonWidget(
+                            productId: productsModel.productId,
+                          ),
                           // cart button
                           IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.add_shopping_cart,
+                            onPressed: () {
+                              if (cartProvider.isProdinCart(
+                                  productId: productsModel.productId)) {
+                                return;
+                              }
+                              cartProvider.addProductToCart(
+                                  productId: productsModel.productId);
+                            },
+                            icon: Icon(
+                              cartProvider.isProdinCart(
+                                      productId: productsModel.productId)
+                                  ? Ionicons.checkmark_done
+                                  : Icons.add_shopping_cart_outlined,
                             ),
                           ),
                         ],
                       ),
                     ),
                     // price
-                    const FittedBox(
+                    FittedBox(
                       child: SubtitleTextWidget(
-                        label: "150.00\$",
+                        label: "${productsModel.productPrice}\$",
                         fontWeight: FontWeight.w600,
                         color: Colors.blue,
                       ),

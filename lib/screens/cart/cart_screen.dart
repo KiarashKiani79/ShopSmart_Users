@@ -63,6 +63,7 @@ class CartScreen extends StatelessWidget {
                         isError: false,
                         context: context,
                         subtitle: "Clear Cart?",
+                        buttonText: "Delete All",
                         fct: () {
                           cartProvider.clearLocalCart();
                         },

@@ -128,6 +128,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         TitlesTextWidget(label: "Welcome back!"),
                         FittedBox(
                           child: SubtitleTextWidget(
+                              color: Colors.grey,
                               label:
                                   "Join our community and unlock exciting opportunities."),
                         ),
