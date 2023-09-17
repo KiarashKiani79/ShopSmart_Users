@@ -35,9 +35,6 @@ class EmptyBagWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // const SizedBox(
-            //   height: 40,
-            // ),
             Image.asset(
               imagePath,
               width: double.infinity,
@@ -62,7 +59,7 @@ class EmptyBagWidget extends StatelessWidget {
               height: 20,
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 40),
               child: SubtitleTextWidget(
                 label: subtitle,
                 fontWeight: FontWeight.w400,
