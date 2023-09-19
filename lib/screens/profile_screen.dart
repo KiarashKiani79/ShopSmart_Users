@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
@@ -6,6 +7,7 @@ import 'package:shopsmart_users/screens/inner_screen/viewed_recently.dart';
 import 'package:shopsmart_users/screens/inner_screen/wishlist.dart';
 import 'package:shopsmart_users/widgets/app_name_text.dart';
 import '../consts/theme_data.dart';
+import '../services/my_app_functions.dart';
 import '/services/assets_manager.dart';
 import '/widgets/subtitle_text.dart';
 
@@ -13,9 +15,15 @@ import '../providers/theme_provider.dart';
 import '../widgets/title_text.dart';
 import 'auth/login.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  User? user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
@@ -162,14 +170,22 @@ class ProfileScreen extends StatelessWidget {
             Center(
               child: ElevatedButton.icon(
                 onPressed: () async {
-                  Navigator.pushNamed(context, LoginScreen.routName);
-
-                  // await MyAppFunctions.showErrorOrWarningDialog(
-                  //   context: context,
-                  //   subtitle: "Are you sure you want to signout",
-                  //   fct: () {
-                  //   },
-                  // );
+                  if (user == null) {
+                    Navigator.pushNamed(context, LoginScreen.routName);
+                  } else {
+                    await MyAppFunctions.showErrorOrWarningDialog(
+                      isError: false,
+                      context: context,
+                      subtitle: "Are you sure you want to Sign-out?",
+                      buttonText: "Sign-out",
+                      fct: () async {
+                        await FirebaseAuth.instance.signOut();
+                        setState(() {
+                          user = null;
+                        });
+                      },
+                    );
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.all(12.0),
@@ -179,8 +195,8 @@ class ProfileScreen extends StatelessWidget {
                   elevation: 6,
                   backgroundColor: Colors.red,
                 ),
-                icon: const Icon(Icons.login),
-                label: const Text("Login"),
+                icon: Icon(user == null ? Icons.login : Icons.logout),
+                label: Text(user == null ? "Login" : "Logout"),
               ),
             ),
           ],

@@ -1,10 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:shopsmart_users/root_screen.dart';
 import 'package:shopsmart_users/screens/auth/forgot_password.dart';
 import '../../consts/theme_data.dart';
 import '../../providers/theme_provider.dart';
+import '../../services/my_app_functions.dart';
 import '/consts/validator.dart';
 import '/screens/auth/register.dart';
 import '/widgets/app_name_text.dart';
@@ -30,6 +33,10 @@ class _LoginScreenState extends State<LoginScreen> {
   late final FocusNode _passwordFocusNode;
 
   final _formkey = GlobalKey<FormState>();
+
+  bool isLoading = false;
+  final auth = FirebaseAuth.instance;
+
   @override
   void initState() {
     _emailController = TextEditingController();
@@ -55,6 +62,30 @@ class _LoginScreenState extends State<LoginScreen> {
   Future<void> _loginFct() async {
     final isValid = _formkey.currentState!.validate();
     FocusScope.of(context).unfocus();
+
+    if (isValid) {
+      try {
+        setState(() {
+          isLoading = true;
+        });
+        await auth.signInWithEmailAndPassword(
+            email: _emailController.text.trim(),
+            password: _passwordController.text.trim());
+        Fluttertoast.showToast(
+          msg: "Logged in successfully!",
+        );
+        if (!mounted) return;
+        Navigator.pushReplacementNamed(context, RootScreen.routName);
+      } on FirebaseAuthException catch (error) {
+        await MyAppFunctions.showErrorOrWarningDialog(
+            context: context, subtitle: error.message.toString(), fct: () {});
+      } catch (error) {
+        await MyAppFunctions.showErrorOrWarningDialog(
+            context: context, subtitle: error.toString(), fct: () {});
+      } finally {
+        isLoading = false;
+      }
+    }
   }
 
   @override

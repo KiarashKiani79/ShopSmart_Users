@@ -29,6 +29,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   XFile? _pickedImage;
   bool isLoading = false;
   final auth = FirebaseAuth.instance;
+
   late final TextEditingController _nameController,
       _emailController,
       _passwordController,
