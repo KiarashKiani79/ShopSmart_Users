@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shopsmart_users/root_screen.dart';
-import 'package:shopsmart_users/screens/search_screen.dart';
 
 import 'subtitle_text.dart';
 import 'title_text.dart';

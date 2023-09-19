@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:shopsmart_users/models/product_model.dart';
 import 'package:shopsmart_users/providers/cart_provider.dart';
 import 'package:shopsmart_users/providers/viewed_recently_provider.dart';
-import 'package:shopsmart_users/providers/wishlist_provider.dart';
 
 import '../../screens/inner_screen/product_details.dart';
 import '../subtitle_text.dart';
