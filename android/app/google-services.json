@@ -7,12 +7,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:96230451410:android:04d9dcb8e3b6ad4c58a50b",
+        "mobilesdk_app_id": "1:96230451410:android:3f91c5017dc8246558a50b",
         "android_client_info": {
-          "package_name": "com.example.shopsmart_users"
+          "package_name": "com.example.shopsmart_admin"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "96230451410-gqv9gipo5rc505va8kcmc78321lo7b3r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDdX1Ydgbjld84ziC3LGeGtY7WhEvCcpq8"
@@ -20,7 +25,49 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "96230451410-gqv9gipo5rc505va8kcmc78321lo7b3r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:96230451410:android:04d9dcb8e3b6ad4c58a50b",
+        "android_client_info": {
+          "package_name": "com.example.shopsmart_users"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "96230451410-r62t52p646qffmofj8vt2pg0olthairl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.shopsmart_users",
+            "certificate_hash": "b52e7b38e5b883dbe96a929af9f2713f9d1a1aba"
+          }
+        },
+        {
+          "client_id": "96230451410-gqv9gipo5rc505va8kcmc78321lo7b3r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdX1Ydgbjld84ziC3LGeGtY7WhEvCcpq8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "96230451410-gqv9gipo5rc505va8kcmc78321lo7b3r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
