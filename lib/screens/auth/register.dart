@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -31,6 +34,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   XFile? _pickedImage;
   bool isLoading = false;
   final auth = FirebaseAuth.instance;
+  String? userImageUrl;
 
   late final TextEditingController _nameController,
       _emailController,
@@ -77,6 +81,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
     final isValid = _formkey.currentState!.validate();
     FocusScope.of(context).unfocus();
 
+    if (_pickedImage == null) {
+      MyAppFunctions.showErrorOrWarningDialog(
+          context: context,
+          subtitle: "Please upload an image for your account.",
+          fct: () {});
+      return;
+    }
+
     if (isValid) {
       try {
         setState(() {
@@ -87,10 +99,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
             password: _passwordController.text.trim());
         final User? user = auth.currentUser;
         final uid = user!.uid;
+
+        final ref = FirebaseStorage.instance
+            .ref()
+            .child("usersImages")
+            .child("${_emailController.text.trim()}.jpg");
+        await ref.putFile(File(_pickedImage!.path));
+        userImageUrl = await ref.getDownloadURL();
         await FirebaseFirestore.instance.collection("users").doc(uid).set({
           'userId': uid,
           'userName': _nameController.text,
-          'userImage': "",
+          'userImage': userImageUrl,
           'userEmail': _emailController.text.toLowerCase(),
           'createdAt': Timestamp.now(),
           'userWish': [],

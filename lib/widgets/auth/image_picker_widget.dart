@@ -10,6 +10,7 @@ class PickImageWidget extends StatelessWidget {
   final Function function;
   @override
   Widget build(BuildContext context) {
+    final deviceSize = MediaQuery.of(context).size;
     return Stack(
       children: [
         Padding(
@@ -27,9 +28,13 @@ class PickImageWidget extends StatelessWidget {
                       ),
                     ),
                   )
-                : Image.file(
-                    File(pickedImage!.path),
-                    fit: BoxFit.cover,
+                : SizedBox(
+                    width: deviceSize.width * 0.3,
+                    height: deviceSize.width * 0.3,
+                    child: Image.file(
+                      File(pickedImage!.path),
+                      fit: BoxFit.cover,
+                    ),
                   ),
           ),
         ),
