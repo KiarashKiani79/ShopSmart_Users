@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -25,8 +26,24 @@ class GoogleButton extends StatelessWidget {
       );
 
       // Once signed in, return the UserCredential
-      await FirebaseAuth.instance.signInWithCredential(credential);
+      final userCredential =
+          await FirebaseAuth.instance.signInWithCredential(credential);
 
+      // Save user data to firestore
+      if (userCredential.additionalUserInfo!.isNewUser) {
+        await FirebaseFirestore.instance
+            .collection("users")
+            .doc(userCredential.user!.uid)
+            .set({
+          'userId': userCredential.user!.uid,
+          'userName': userCredential.user!.displayName,
+          'userImage': userCredential.user!.photoURL,
+          'userEmail': userCredential.user!.email,
+          'createdAt': Timestamp.now(),
+          'userWish': [],
+          'userCart': [],
+        });
+      }
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
         Navigator.pushReplacementNamed(context, RootScreen.routName);
       });

@@ -1,13 +1,15 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+// Providers
 import 'package:provider/provider.dart';
-import 'package:shopsmart_users/providers/viewed_recently_provider.dart';
-import 'package:shopsmart_users/providers/wishlist_provider.dart';
-import 'consts/theme_data.dart';
+import '/providers/user_provider.dart';
+import '/providers/viewed_recently_provider.dart';
+import '/providers/wishlist_provider.dart';
 import '/providers/cart_provider.dart';
 import './providers/theme_provider.dart';
 import '/providers/products_provider.dart';
+// Screens
 import '/root_screen.dart';
 import '/screens/auth/forgot_password.dart';
 import '/screens/search_screen.dart';
@@ -17,6 +19,8 @@ import '/screens/inner_screen/orders/orders_screen.dart';
 import '/screens/inner_screen/viewed_recently.dart';
 import '/screens/inner_screen/wishlist.dart';
 import 'screens/inner_screen/product_details.dart';
+// Styles
+import 'consts/theme_data.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -70,6 +74,9 @@ class MyApp extends StatelessWidget {
               }),
               ChangeNotifierProvider(create: (_) {
                 return ViewedProdProvider();
+              }),
+              ChangeNotifierProvider(create: (_) {
+                return UserProvider();
               }),
             ],
             child: Consumer<ThemeProvider>(

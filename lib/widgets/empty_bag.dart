@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shopsmart_users/root_screen.dart';
 
+import '../consts/theme_data.dart';
+import '../providers/theme_provider.dart';
 import 'subtitle_text.dart';
 import 'title_text.dart';
 
@@ -18,8 +21,10 @@ class EmptyBagWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
+        systemOverlayStyle: statusBarTheme(themeProvider),
         leading: Navigator.canPop(context)
             ? IconButton(
                 onPressed: () {

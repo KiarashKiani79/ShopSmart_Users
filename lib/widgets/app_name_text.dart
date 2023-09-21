@@ -11,7 +11,7 @@ class AppNameTextWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      period: const Duration(seconds: 10),
+      period: const Duration(seconds: 5),
       baseColor: Colors.purple,
       highlightColor: Colors.red,
       child: TitlesTextWidget(
