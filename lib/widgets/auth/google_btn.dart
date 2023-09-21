@@ -8,9 +8,19 @@ import 'package:ionicons/ionicons.dart';
 import '../../root_screen.dart';
 import '../../services/my_app_functions.dart';
 
-class GoogleButton extends StatelessWidget {
+class GoogleButton extends StatefulWidget {
   const GoogleButton({super.key});
+
+  @override
+  State<GoogleButton> createState() => _GoogleButtonState();
+}
+
+class _GoogleButtonState extends State<GoogleButton> {
+  bool isLoading = false;
   Future<void> _signInWithGoogle({required BuildContext context}) async {
+    setState(() {
+      isLoading = true;
+    });
     try {
       // Trigger the authentication flow
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
@@ -63,26 +73,34 @@ class GoogleButton extends StatelessWidget {
         subtitle: error.toString(),
         fct: () {},
       );
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton.icon(
-      style: ElevatedButton.styleFrom(
-        elevation: 1,
-        padding: const EdgeInsets.all(12.0),
-      ),
-      icon: const Icon(
-        Ionicons.logo_google,
-        color: Colors.red,
-      ),
-      label: const Text(
-        "Sign in with Google",
-      ),
-      onPressed: () async {
-        await _signInWithGoogle(context: context);
-      },
-    );
+    return isLoading
+        ? const CircularProgressIndicator()
+        : ElevatedButton.icon(
+            style: ElevatedButton.styleFrom(
+              elevation: 1,
+              padding: const EdgeInsets.all(12.0),
+            ),
+            icon: const Icon(
+              Ionicons.logo_google,
+              color: Colors.red,
+            ),
+            label: const Text(
+              "Sign in with Google",
+            ),
+            onPressed: isLoading
+                ? null
+                : () async {
+                    await _signInWithGoogle(context: context);
+                  },
+          );
   }
 }

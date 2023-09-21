@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // Providers
 import 'package:provider/provider.dart';
+import 'package:shopsmart_users/screens/profile_screen.dart';
 import '/providers/user_provider.dart';
 import '/providers/viewed_recently_provider.dart';
 import '/providers/wishlist_provider.dart';
@@ -101,6 +102,7 @@ class MyApp extends StatelessWidget {
                   ForgotPasswordScreen.routeName: (context) =>
                       const ForgotPasswordScreen(),
                   SearchScreen.routeName: (context) => const SearchScreen(),
+                  ProfileScreen.routeName: (context) => const ProfileScreen(),
                 },
               );
             }),

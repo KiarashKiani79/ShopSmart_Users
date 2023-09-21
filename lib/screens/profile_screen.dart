@@ -21,6 +21,7 @@ import 'auth/login.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+  static const routeName = "/profile-screen";
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -34,6 +35,7 @@ class _ProfileScreenState extends State<ProfileScreen>
 
   UserModel? userModel;
   bool _isLoading = true;
+
   Future<void> fetchUserInfo() async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     try {
@@ -234,6 +236,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                           setState(() {
                             user = null;
                           });
+                          if (!mounted) return;
+                          Navigator.pushNamed(context, ProfileScreen.routeName);
                         },
                       );
                     }
