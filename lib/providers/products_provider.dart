@@ -55,6 +55,21 @@ class ProductsProvider with ChangeNotifier {
       rethrow;
     }
   }
+
+  Stream<List<ProductModel>> fetchProductsStream() {
+    try {
+      return productsDb.snapshots().map((snapshot) {
+        products.clear();
+        // products = []
+        for (var element in snapshot.docs) {
+          products.insert(0, ProductModel.fromFirestore(element));
+        }
+        return products;
+      });
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
   // List<ProductModel> products = [
   //   // Phones
