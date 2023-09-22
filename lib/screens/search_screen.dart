@@ -1,15 +1,17 @@
-import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:provider/provider.dart';
-
-import '../consts/theme_data.dart';
-import '../models/product_model.dart';
+// Providers
 import '../providers/products_provider.dart';
 import '../providers/theme_provider.dart';
-import '../services/assets_manager.dart';
+// Widgets
 import '../widgets/products/product_widget.dart';
 import '../widgets/title_text.dart';
+// Styles
+import '../consts/theme_data.dart';
+import '../models/product_model.dart';
+import '../services/assets_manager.dart';
 
 class SearchScreen extends StatefulWidget {
   static const routeName = "/search-screen";

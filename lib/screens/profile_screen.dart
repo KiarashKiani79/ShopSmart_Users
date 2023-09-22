@@ -1,23 +1,26 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:shopsmart_users/screens/inner_screen/orders/orders_screen.dart';
-import 'package:shopsmart_users/screens/inner_screen/viewed_recently.dart';
-import 'package:shopsmart_users/screens/inner_screen/wishlist.dart';
-import 'package:shopsmart_users/screens/loading_manager.dart';
-import 'package:shopsmart_users/widgets/app_name_text.dart';
-import '../consts/theme_data.dart';
-import '../models/user_model.dart';
+// Providers
+import 'package:provider/provider.dart';
 import '../providers/user_provider.dart';
-import '../services/my_app_functions.dart';
-import '/services/assets_manager.dart';
-import '/widgets/subtitle_text.dart';
-
 import '../providers/theme_provider.dart';
+// Screens
+import '/screens/inner_screen/orders/orders_screen.dart';
+import '/screens/inner_screen/viewed_recently.dart';
+import '/screens/inner_screen/wishlist.dart';
+import '/screens/loading_manager.dart';
+// Widgets
+import '/widgets/app_name_text.dart';
+import '/widgets/subtitle_text.dart';
 import '../widgets/title_text.dart';
 import 'auth/login.dart';
+// Styles
+import '../consts/theme_data.dart';
+import '../models/user_model.dart';
+import '../services/my_app_functions.dart';
+import '/services/assets_manager.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
