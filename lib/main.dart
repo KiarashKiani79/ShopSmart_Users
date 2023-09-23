@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // Providers
 import 'package:provider/provider.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:shopsmart_users/screens/profile_screen.dart';
 import '/providers/user_provider.dart';
 import '/providers/viewed_recently_provider.dart';
@@ -23,7 +22,6 @@ import '/screens/inner_screen/wishlist.dart';
 import 'screens/inner_screen/product_details.dart';
 // Styles
 import 'consts/theme_data.dart';
-import 'widgets/title_text.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
