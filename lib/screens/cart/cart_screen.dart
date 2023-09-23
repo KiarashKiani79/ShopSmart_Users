@@ -64,8 +64,8 @@ class CartScreen extends StatelessWidget {
                         context: context,
                         subtitle: "Clear Cart?",
                         buttonText: "Delete All",
-                        fct: () {
-                          cartProvider.removeAllItemsFromCartFirebase();
+                        fct: () async {
+                          cartProvider.removeAllItemsFromFirestore();
                         },
                       );
                     }

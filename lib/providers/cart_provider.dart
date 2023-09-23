@@ -135,30 +135,29 @@ class CartProvider with ChangeNotifier {
   }
 
   // Remove a single item from the Firestore cart
-  Future<void> removeItemFromCartFirebase({
+  Future<void> removeItemFromFirestore({
+    required String cartId,
     required String productId,
+    required int qty,
   }) async {
     final User? user = _auth.currentUser;
-    if (user == null) {
-      // Handle when the user is not logged in
-      return;
-    }
-    final uid = user.uid;
+    final uid = user!.uid;
 
     try {
       await userstDb.doc(uid).update({
         'userCart': FieldValue.arrayRemove([
-          {'productId': productId},
+          {'cartId': cartId, 'quantity': qty, 'productId': productId},
         ]),
       });
-      await fetchCart();
+      _cartItems.remove(productId);
+      Fluttertoast.showToast(msg: "Item removed successfully");
     } catch (e) {
       rethrow;
     }
   }
 
   // Remove all items from the Firestore cart
-  Future<void> removeAllItemsFromCartFirebase() async {
+  Future<void> removeAllItemsFromFirestore() async {
     final User? user = _auth.currentUser;
     if (user == null) {
       // Handle when the user is not logged in
@@ -168,9 +167,10 @@ class CartProvider with ChangeNotifier {
 
     try {
       await userstDb.doc(uid).update({
-        'userCart': FieldValue.delete(),
+        'userCart': [],
       });
-      await fetchCart();
+      _cartItems.clear();
+      Fluttertoast.showToast(msg: "Cart cleared successfully");
     } catch (e) {
       rethrow;
     }
