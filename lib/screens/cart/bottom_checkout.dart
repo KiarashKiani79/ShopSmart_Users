@@ -8,7 +8,8 @@ import '/widgets/subtitle_text.dart';
 import '/widgets/title_text.dart';
 
 class CartBottomSheetWidget extends StatelessWidget {
-  const CartBottomSheetWidget({super.key});
+  const CartBottomSheetWidget({super.key, required this.function});
+  final Function function;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +48,9 @@ class CartBottomSheetWidget extends StatelessWidget {
                 ),
               ),
               ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    await function();
+                  },
                   style: ElevatedButton.styleFrom(
                     elevation: 4,
                     backgroundColor: Theme.of(context).colorScheme.primary,
