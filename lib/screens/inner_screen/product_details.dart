@@ -6,6 +6,7 @@ import 'package:shopsmart_users/consts/theme_data.dart';
 import '../../providers/cart_provider.dart';
 import '../../providers/products_provider.dart';
 import '../../providers/theme_provider.dart';
+import '../../services/my_app_functions.dart';
 import '../../widgets/products/heart_btn.dart';
 import '/widgets/title_text.dart';
 
@@ -132,14 +133,27 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: Colors.red,
                                     ),
-                                    onPressed: () {
-                                      if (cartProvider.isProdinCart(
-                                          productId:
-                                              getCurrProduct.productId)) {
-                                        return;
+                                    onPressed: () async {
+                                      try {
+                                        await cartProvider.addToCartFirebase(
+                                            productId: getCurrProduct.productId,
+                                            qty: 1,
+                                            context: context);
+                                      } catch (e) {
+                                        await MyAppFunctions
+                                            .showErrorOrWarningDialog(
+                                          context: context,
+                                          subtitle: e.toString(),
+                                          fct: () {},
+                                        );
                                       }
-                                      cartProvider.addProductToCart(
-                                          productId: getCurrProduct.productId);
+                                      // if (cartProvider.isProdinCart(
+                                      //     productId:
+                                      //         getCurrProduct.productId)) {
+                                      //   return;
+                                      // }
+                                      // cartProvider.addProductToCart(
+                                      //     productId: getCurrProduct.productId);
                                     },
                                   ),
                                 ),

@@ -6,6 +6,7 @@ import '../../providers/cart_provider.dart';
 import '../../providers/products_provider.dart';
 import '../../providers/viewed_recently_provider.dart';
 import '../../screens/inner_screen/product_details.dart';
+import '../../services/my_app_functions.dart';
 import '/widgets/subtitle_text.dart';
 import '/widgets/title_text.dart';
 import 'heart_btn.dart';
@@ -104,13 +105,26 @@ class _ProductWidgetState extends State<ProductWidget> {
                         Flexible(
                           child: IconButton(
                             highlightColor: Colors.blue,
-                            onPressed: () {
-                              if (cartProvider.isProdinCart(
-                                  productId: getCurrProduct.productId)) {
-                                return;
+                            onPressed: () async {
+                              try {
+                                await cartProvider.addToCartFirebase(
+                                    productId: getCurrProduct.productId,
+                                    qty: 1,
+                                    context: context);
+                              } catch (e) {
+                                await MyAppFunctions.showErrorOrWarningDialog(
+                                  context: context,
+                                  subtitle: e.toString(),
+                                  fct: () {},
+                                );
                               }
-                              cartProvider.addProductToCart(
-                                  productId: getCurrProduct.productId);
+
+                              // if (cartProvider.isProdinCart(
+                              //     productId: getCurrProduct.productId)) {
+                              //   return;
+                              // }
+                              // cartProvider.addProductToCart(
+                              //     productId: getCurrProduct.productId);
                             },
                             style: ButtonStyle(
                               backgroundColor: MaterialStatePropertyAll(

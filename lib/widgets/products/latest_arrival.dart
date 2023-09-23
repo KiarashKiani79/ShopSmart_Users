@@ -7,6 +7,7 @@ import 'package:shopsmart_users/providers/cart_provider.dart';
 import 'package:shopsmart_users/providers/viewed_recently_provider.dart';
 
 import '../../screens/inner_screen/product_details.dart';
+import '../../services/my_app_functions.dart';
 import '../subtitle_text.dart';
 import 'heart_btn.dart';
 
@@ -71,13 +72,25 @@ class LatestArrivalProductsWidget extends StatelessWidget {
                           ),
                           // cart button
                           IconButton(
-                            onPressed: () {
-                              if (cartProvider.isProdinCart(
-                                  productId: productsModel.productId)) {
-                                return;
+                            onPressed: () async {
+                              try {
+                                await cartProvider.addToCartFirebase(
+                                    productId: productsModel.productId,
+                                    qty: 1,
+                                    context: context);
+                              } catch (e) {
+                                await MyAppFunctions.showErrorOrWarningDialog(
+                                  context: context,
+                                  subtitle: e.toString(),
+                                  fct: () {},
+                                );
                               }
-                              cartProvider.addProductToCart(
-                                  productId: productsModel.productId);
+                              // if (cartProvider.isProdinCart(
+                              //     productId: productsModel.productId)) {
+                              //   return;
+                              // }
+                              // cartProvider.addProductToCart(
+                              //     productId: productsModel.productId);
                             },
                             icon: Icon(
                               cartProvider.isProdinCart(
