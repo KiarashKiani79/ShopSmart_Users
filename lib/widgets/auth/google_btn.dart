@@ -83,7 +83,11 @@ class _GoogleButtonState extends State<GoogleButton> {
   @override
   Widget build(BuildContext context) {
     return isLoading
-        ? const CircularProgressIndicator()
+        ? const Center(
+            child: CircularProgressIndicator(
+              color: Colors.red,
+            ),
+          )
         : ElevatedButton.icon(
             style: ElevatedButton.styleFrom(
               elevation: 1,
