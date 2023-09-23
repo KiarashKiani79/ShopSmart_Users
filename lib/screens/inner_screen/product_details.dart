@@ -134,6 +134,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                       backgroundColor: Colors.red,
                                     ),
                                     onPressed: () async {
+                                      if (cartProvider.isProdinCart(
+                                          productId:
+                                              getCurrProduct.productId)) {
+                                        return;
+                                      }
                                       try {
                                         await cartProvider.addToCartFirebase(
                                             productId: getCurrProduct.productId,
@@ -147,13 +152,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                           fct: () {},
                                         );
                                       }
-                                      // if (cartProvider.isProdinCart(
-                                      //     productId:
-                                      //         getCurrProduct.productId)) {
-                                      //   return;
-                                      // }
-                                      // cartProvider.addProductToCart(
-                                      //     productId: getCurrProduct.productId);
                                     },
                                   ),
                                 ),

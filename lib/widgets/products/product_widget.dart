@@ -106,6 +106,10 @@ class _ProductWidgetState extends State<ProductWidget> {
                           child: IconButton(
                             highlightColor: Colors.blue,
                             onPressed: () async {
+                              if (cartProvider.isProdinCart(
+                                  productId: getCurrProduct.productId)) {
+                                return;
+                              }
                               try {
                                 await cartProvider.addToCartFirebase(
                                     productId: getCurrProduct.productId,
@@ -118,13 +122,6 @@ class _ProductWidgetState extends State<ProductWidget> {
                                   fct: () {},
                                 );
                               }
-
-                              // if (cartProvider.isProdinCart(
-                              //     productId: getCurrProduct.productId)) {
-                              //   return;
-                              // }
-                              // cartProvider.addProductToCart(
-                              //     productId: getCurrProduct.productId);
                             },
                             style: ButtonStyle(
                               backgroundColor: MaterialStatePropertyAll(

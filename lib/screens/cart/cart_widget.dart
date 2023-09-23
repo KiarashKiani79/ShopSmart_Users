@@ -61,7 +61,7 @@ class CartWidget extends StatelessWidget {
                                     // remove button
                                     IconButton(
                                       onPressed: () {
-                                        cartProvider.removeOneItem(
+                                        cartProvider.removeItemFromCartFirebase(
                                           productId: getCurrProduct.productId,
                                         );
                                       },

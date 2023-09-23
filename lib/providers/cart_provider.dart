@@ -16,7 +16,7 @@ class CartProvider with ChangeNotifier {
 
   final userstDb = FirebaseFirestore.instance.collection("users");
   final _auth = FirebaseAuth.instance;
-// Firebase
+// Firebase - ADD
   Future<void> addToCartFirebase({
     required String productId,
     required int qty,
@@ -44,6 +44,7 @@ class CartProvider with ChangeNotifier {
           }
         ])
       });
+      await fetchCart();
       Fluttertoast.showToast(msg: "Added to cart successfully");
     } on FirebaseException catch (error) {
       MyAppFunctions.showErrorOrWarningDialog(
@@ -54,6 +55,35 @@ class CartProvider with ChangeNotifier {
     } catch (e) {
       rethrow;
     }
+  }
+
+// Firebase - Fetch
+  Future<void> fetchCart() async {
+    final User? user = _auth.currentUser;
+    if (user == null) {
+      _cartItems.clear();
+      return;
+    }
+    try {
+      final userDoc = await userstDb.doc(user.uid).get();
+      final data = userDoc.data();
+      if (data == null || !data.containsKey('userCart')) {
+        return;
+      }
+      final len = userDoc.get("userCart").length;
+      for (int index = 0; index < len; index++) {
+        _cartItems.putIfAbsent(
+          userDoc.get("userCart")[index]['productId'],
+          () => CartModel(
+              cartId: userDoc.get("userCart")[index]['cartId'],
+              productId: userDoc.get("userCart")[index]['productId'],
+              quantity: userDoc.get("userCart")[index]['quantity']),
+        );
+      }
+    } catch (e) {
+      rethrow;
+    }
+    notifyListeners();
   }
 
 // Local
@@ -102,6 +132,48 @@ class CartProvider with ChangeNotifier {
       total += value.quantity;
     });
     return total;
+  }
+
+  // Remove a single item from the Firestore cart
+  Future<void> removeItemFromCartFirebase({
+    required String productId,
+  }) async {
+    final User? user = _auth.currentUser;
+    if (user == null) {
+      // Handle when the user is not logged in
+      return;
+    }
+    final uid = user.uid;
+
+    try {
+      await userstDb.doc(uid).update({
+        'userCart': FieldValue.arrayRemove([
+          {'productId': productId},
+        ]),
+      });
+      await fetchCart();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  // Remove all items from the Firestore cart
+  Future<void> removeAllItemsFromCartFirebase() async {
+    final User? user = _auth.currentUser;
+    if (user == null) {
+      // Handle when the user is not logged in
+      return;
+    }
+    final uid = user.uid;
+
+    try {
+      await userstDb.doc(uid).update({
+        'userCart': FieldValue.delete(),
+      });
+      await fetchCart();
+    } catch (e) {
+      rethrow;
+    }
   }
 
   void clearLocalCart() {

@@ -73,6 +73,10 @@ class LatestArrivalProductsWidget extends StatelessWidget {
                           // cart button
                           IconButton(
                             onPressed: () async {
+                              if (cartProvider.isProdinCart(
+                                  productId: productsModel.productId)) {
+                                return;
+                              }
                               try {
                                 await cartProvider.addToCartFirebase(
                                     productId: productsModel.productId,
@@ -85,12 +89,6 @@ class LatestArrivalProductsWidget extends StatelessWidget {
                                   fct: () {},
                                 );
                               }
-                              // if (cartProvider.isProdinCart(
-                              //     productId: productsModel.productId)) {
-                              //   return;
-                              // }
-                              // cartProvider.addProductToCart(
-                              //     productId: productsModel.productId);
                             },
                             icon: Icon(
                               cartProvider.isProdinCart(

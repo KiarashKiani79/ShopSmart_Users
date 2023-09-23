@@ -36,10 +36,14 @@ class _RootScreenState extends State<RootScreen> {
   Future<void> fetchFCT() async {
     final productsProvider =
         Provider.of<ProductsProvider>(context, listen: false);
+    final cartProvider = Provider.of<CartProvider>(context, listen: false);
 
     try {
       Future.wait({
         productsProvider.fetchProducts(),
+      });
+      Future.wait({
+        cartProvider.fetchCart(),
       });
     } catch (error) {
       rethrow;

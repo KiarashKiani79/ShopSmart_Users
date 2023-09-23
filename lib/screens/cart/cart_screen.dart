@@ -65,7 +65,7 @@ class CartScreen extends StatelessWidget {
                         subtitle: "Clear Cart?",
                         buttonText: "Delete All",
                         fct: () {
-                          cartProvider.clearLocalCart();
+                          cartProvider.removeAllItemsFromCartFirebase();
                         },
                       );
                     }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shopsmart_users/providers/theme_provider.dart';
 
 import '../../providers/cart_provider.dart';
 import '../../providers/products_provider.dart';
@@ -11,6 +12,7 @@ class CartBottomSheetWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
     final productsProvider = Provider.of<ProductsProvider>(context);
     final cartProvider = Provider.of<CartProvider>(context);
     return Container(
@@ -45,9 +47,15 @@ class CartBottomSheetWidget extends StatelessWidget {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {},
-                child: const Text("Checkout"),
-              ),
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    elevation: 4,
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    foregroundColor: themeProvider.getIsDarkTheme
+                        ? Colors.black
+                        : Colors.white,
+                  ),
+                  child: const Text("Checkout")),
             ],
           ),
         ),
