@@ -43,14 +43,14 @@ class WishlistScreen extends StatelessWidget {
                   label: "Wishlist (${wishlistProvider.getWishlists.length})"),
               actions: [
                 IconButton(
-                  onPressed: () {
+                  onPressed: () async {
                     MyAppFunctions.showErrorOrWarningDialog(
                       isError: false,
                       context: context,
                       subtitle: "Clear Wishlist?",
                       buttonText: "Delete All",
                       fct: () {
-                        wishlistProvider.clearLocalWishlist();
+                        wishlistProvider.clearWishlistFromFirebase();
                       },
                     );
                   },
