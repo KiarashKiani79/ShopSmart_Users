@@ -20,7 +20,6 @@ class HeartButtonWidget extends StatefulWidget {
 }
 
 class _HeartButtonWidgetState extends State<HeartButtonWidget> {
-  bool _isLoading = false;
   @override
   Widget build(BuildContext context) {
     final wishlistsProvider = Provider.of<WishlistProvider>(context);
@@ -33,13 +32,7 @@ class _HeartButtonWidgetState extends State<HeartButtonWidget> {
       child: IconButton(
         style: IconButton.styleFrom(elevation: 10),
         onPressed: () async {
-          setState(() {
-            _isLoading = true;
-          });
           try {
-            // wishlistsProvider.addOrRemoveFromWishlist(
-            //   productId: widget.productId,
-            // );
             if (wishlistsProvider.getWishlists.containsKey(widget.productId)) {
               await wishlistsProvider.removeWishlistItemFromFirestore(
                 wishlistId: wishlistsProvider
@@ -59,27 +52,21 @@ class _HeartButtonWidgetState extends State<HeartButtonWidget> {
               subtitle: e.toString(),
               fct: () {},
             );
-          } finally {
-            setState(() {
-              _isLoading = false;
-            });
           }
         },
-        icon: _isLoading
-            ? const CircularProgressIndicator()
-            : Icon(
-                wishlistsProvider.isProdinWishlist(
-                  productId: widget.productId,
-                )
-                    ? IconlyBold.heart
-                    : IconlyLight.heart,
-                size: widget.size,
-                color: wishlistsProvider.isProdinWishlist(
-                  productId: widget.productId,
-                )
-                    ? Colors.red
-                    : Colors.grey,
-              ),
+        icon: Icon(
+          wishlistsProvider.isProdinWishlist(
+            productId: widget.productId,
+          )
+              ? IconlyBold.heart
+              : IconlyLight.heart,
+          size: widget.size,
+          color: wishlistsProvider.isProdinWishlist(
+            productId: widget.productId,
+          )
+              ? Colors.red
+              : Colors.grey,
+        ),
       ),
     );
   }

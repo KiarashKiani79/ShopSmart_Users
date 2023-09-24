@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
 import 'package:shopsmart_users/providers/order_provider.dart';
 import '../../../../widgets/empty_bag.dart';
+import '../../../consts/theme_data.dart';
 import '../../../models/order_model.dart';
+import '../../../providers/theme_provider.dart';
 import '../../../services/assets_manager.dart';
+import '../../../services/my_app_functions.dart';
 import '../../../widgets/title_text.dart';
 import 'orders_widget.dart';
 
@@ -19,13 +23,59 @@ class OrdersScreen extends StatefulWidget {
 class _OrdersScreenState extends State<OrdersScreen> {
   @override
   Widget build(BuildContext context) {
-    final ordersProvider = Provider.of<OrderProvider>(context, listen: false);
+    final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
+    final ordersProvider = Provider.of<OrderProvider>(context, listen: true);
     Size deviceSize = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
+        leading: Navigator.canPop(context)
+            ? IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(
+                  Icons.arrow_back_ios,
+                  size: 20,
+                ),
+              )
+            : null,
         title: const TitlesTextWidget(
           label: 'Placed orders',
         ),
+        systemOverlayStyle: statusBarTheme(themeProvider),
+        actions: [
+          PopupMenuButton(
+            itemBuilder: (ctx) => [
+              const PopupMenuItem(
+                value: 'clear',
+                child: Row(
+                  children: [
+                    Icon(
+                      IconlyBold.delete,
+                      color: Colors.red,
+                    ),
+                    SizedBox(width: 4),
+                    Text('Delete All'),
+                  ],
+                ),
+              ),
+            ],
+            onSelected: (value) {
+              if (value == 'clear') {
+                MyAppFunctions.showErrorOrWarningDialog(
+                  isError: false,
+                  context: context,
+                  subtitle: "Clear Cart?",
+                  buttonText: "Delete All",
+                  fct: () async {
+                    ordersProvider.removeAllOrdersFromFirestore();
+                  },
+                );
+              }
+            },
+          ),
+        ],
       ),
       body: FutureBuilder<List<OrdersModelAdvanced>>(
         future: ordersProvider.fetchOrders(),
@@ -39,11 +89,13 @@ class _OrdersScreenState extends State<OrdersScreen> {
               child: SelectableText(snapshot.error.toString()),
             );
           } else if (!snapshot.hasData || ordersProvider.getOrders.isEmpty) {
-            EmptyBagWidget(
-                imagePath: AssetsManager.orderBag,
-                title: "No orders has been placed yet",
-                subtitle: "",
-                buttonText: "Shop now");
+            return EmptyBagWidget(
+              imagePath: AssetsManager.orderBag,
+              title: "No orders has been placed yet",
+              subtitle: "",
+              buttonText: "Shop now",
+              isItOrderBag: true,
+            );
           }
           return ListView.separated(
             itemCount: snapshot.data!.length,

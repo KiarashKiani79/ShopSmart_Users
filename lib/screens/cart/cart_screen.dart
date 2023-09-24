@@ -118,6 +118,7 @@ class _CartScreenState extends State<CartScreen> {
           );
   }
 
+// Place Order - Firebase
   Future<void> placeOrderAdvanced({
     required CartProvider cartProvider,
     required ProductsProvider productProvider,

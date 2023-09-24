@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shopsmart_users/models/order_model.dart';
 
 class OrderProvider with ChangeNotifier {
@@ -10,6 +11,9 @@ class OrderProvider with ChangeNotifier {
   final userstDb = FirebaseFirestore.instance.collection("users");
   final _auth = FirebaseAuth.instance;
 
+// ****************************** Firebase ******************************
+
+// Fetch orders - Firebase
   Future<List<OrdersModelAdvanced>> fetchOrders() async {
     final User? user = _auth.currentUser;
     final uid = user!.uid;
@@ -39,6 +43,48 @@ class OrderProvider with ChangeNotifier {
         }
       });
       return _orders;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+// Place Order - Firebase => lib\screens\cart\cart_screen.dart
+
+// Remove One Order - Firebase
+  Future<void> removeOrderFirebase({required String orderId}) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection("ordersAdvanced")
+          .doc(orderId)
+          .delete();
+
+      _orders.removeWhere((element) => element.orderId == orderId);
+      notifyListeners();
+      Fluttertoast.cancel();
+      Fluttertoast.showToast(msg: "Removed successfully");
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+// Remove All - Firebase
+  Future<void> removeAllOrdersFromFirestore() async {
+    final User? user = _auth.currentUser;
+    final uid = user!.uid;
+    try {
+      await FirebaseFirestore.instance
+          .collection("ordersAdvanced")
+          .where('userId', isEqualTo: uid)
+          .get()
+          .then((orderSnapshot) {
+        for (var element in orderSnapshot.docs) {
+          element.reference.delete();
+        }
+      });
+      _orders.clear();
+      notifyListeners();
+      Fluttertoast.cancel();
+      Fluttertoast.showToast(msg: "Cleared orders successfully");
     } catch (e) {
       rethrow;
     }

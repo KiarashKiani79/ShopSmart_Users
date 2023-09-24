@@ -40,8 +40,6 @@ class WishlistProvider with ChangeNotifier {
           }
         ])
       });
-
-      Fluttertoast.showToast(msg: "Item has been added to wishlist");
     } catch (e) {
       rethrow;
     }

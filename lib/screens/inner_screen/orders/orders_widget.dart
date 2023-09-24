@@ -1,9 +1,11 @@
-import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
-import 'package:shopsmart_users/models/order_model.dart';
-import '../../../consts/app_constants.dart';
-import '../../../widgets/subtitle_text.dart';
-import '../../../widgets/title_text.dart';
+import 'package:intl/intl.dart';
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
+import 'package:provider/provider.dart';
+import '../../../providers/order_provider.dart';
+import '/models/order_model.dart';
+import '/widgets/subtitle_text.dart';
+import '/widgets/title_text.dart';
 
 class OrdersWidgetFree extends StatefulWidget {
   const OrdersWidgetFree({super.key, required this.ordersModelAdvanced});
@@ -19,6 +21,7 @@ class _OrdersWidgetFreeState extends State<OrdersWidgetFree> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final ordersProvider = Provider.of<OrderProvider>(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
       child: Row(
@@ -48,8 +51,12 @@ class _OrdersWidgetFreeState extends State<OrdersWidgetFree> {
                           fontSize: 15,
                         ),
                       ),
+                      // remove button
                       IconButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            await ordersProvider.removeOrderFirebase(
+                                orderId: widget.ordersModelAdvanced.orderId);
+                          },
                           icon: const Icon(
                             Icons.remove_circle_outline,
                             color: Colors.red,
@@ -75,9 +82,22 @@ class _OrdersWidgetFreeState extends State<OrdersWidgetFree> {
                   const SizedBox(
                     height: 5,
                   ),
-                  SubtitleTextWidget(
-                    label: "Qty: ${widget.ordersModelAdvanced.quantity}",
-                    fontSize: 15,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SubtitleTextWidget(
+                        label: "Qty: ${widget.ordersModelAdvanced.quantity}",
+                        fontSize: 15,
+                      ),
+                      FittedBox(
+                        child: SubtitleTextWidget(
+                          label: DateFormat('MMMM dd, yyyy - HH:mm').format(
+                            widget.ordersModelAdvanced.orderDate.toDate(),
+                          ),
+                          fontSize: 10,
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(
                     height: 5,
