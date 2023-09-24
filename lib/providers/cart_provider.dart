@@ -14,9 +14,12 @@ class CartProvider with ChangeNotifier {
     return _cartItems;
   }
 
+// ****************************** Firebase ******************************
+
   final userstDb = FirebaseFirestore.instance.collection("users");
   final _auth = FirebaseAuth.instance;
-// Firebase - ADD
+
+// Add to cart - Firebase
   Future<void> addToCartFirebase({
     required String productId,
     required int qty,
@@ -45,6 +48,7 @@ class CartProvider with ChangeNotifier {
         ])
       });
       await fetchCart();
+      Fluttertoast.cancel();
       Fluttertoast.showToast(msg: "Added to cart successfully");
     } on FirebaseException catch (error) {
       MyAppFunctions.showErrorOrWarningDialog(
@@ -57,7 +61,7 @@ class CartProvider with ChangeNotifier {
     }
   }
 
-// Firebase - Fetch
+// Fetch cart - Firebase
   Future<void> fetchCart() async {
     final User? user = _auth.currentUser;
     if (user == null) {
@@ -86,55 +90,7 @@ class CartProvider with ChangeNotifier {
     notifyListeners();
   }
 
-// Local
-  void addProductToCart({required String productId}) {
-    _cartItems.putIfAbsent(
-      productId,
-      () => CartModel(
-          cartId: const Uuid().v4(), productId: productId, quantity: 1),
-    );
-    notifyListeners();
-  }
-
-  void updateQty({required String productId, required int qty}) {
-    _cartItems.update(
-      productId,
-      (cartItem) => CartModel(
-        cartId: cartItem.cartId,
-        productId: productId,
-        quantity: qty,
-      ),
-    );
-    notifyListeners();
-  }
-
-  bool isProdinCart({required String productId}) {
-    return _cartItems.containsKey(productId);
-  }
-
-  double getTotal({required ProductsProvider productsProvider}) {
-    double total = 0.0;
-
-    _cartItems.forEach((key, value) {
-      final getCurrProduct = productsProvider.findByProdId(value.productId);
-      if (getCurrProduct == null) {
-        total += 0;
-      } else {
-        total += double.parse(getCurrProduct.productPrice) * value.quantity;
-      }
-    });
-    return total;
-  }
-
-  int getQty() {
-    int total = 0;
-    _cartItems.forEach((key, value) {
-      total += value.quantity;
-    });
-    return total;
-  }
-
-  // Remove a single item from the Firestore cart
+// Remove One - Firebase
   Future<void> removeItemFromFirestore({
     required String cartId,
     required String productId,
@@ -150,39 +106,95 @@ class CartProvider with ChangeNotifier {
         ]),
       });
       _cartItems.remove(productId);
+      Fluttertoast.cancel();
       Fluttertoast.showToast(msg: "Item removed successfully");
     } catch (e) {
       rethrow;
     }
   }
 
-  // Remove all items from the Firestore cart
-  Future<void> removeAllItemsFromFirestore() async {
+// Remove All - Firebase
+  Future<void> removeAllItemsFromFirestore(
+      {String msg = "Cart cleared successfully"}) async {
     final User? user = _auth.currentUser;
-    if (user == null) {
-      // Handle when the user is not logged in
-      return;
-    }
-    final uid = user.uid;
+
+    final uid = user!.uid;
 
     try {
       await userstDb.doc(uid).update({
         'userCart': [],
       });
       _cartItems.clear();
-      Fluttertoast.showToast(msg: "Cart cleared successfully");
+      Fluttertoast.cancel();
+      Fluttertoast.showToast(msg: msg);
     } catch (e) {
       rethrow;
     }
   }
 
+// ****************************** Localy ******************************
+
+// Add to cart - Localy
+  void addProductToCart({required String productId}) {
+    _cartItems.putIfAbsent(
+      productId,
+      () => CartModel(
+          cartId: const Uuid().v4(), productId: productId, quantity: 1),
+    );
+    notifyListeners();
+  }
+
+// Update Quantity - Localy
+  void updateQty({required String productId, required int qty}) {
+    _cartItems.update(
+      productId,
+      (cartItem) => CartModel(
+        cartId: cartItem.cartId,
+        productId: productId,
+        quantity: qty,
+      ),
+    );
+    notifyListeners();
+  }
+
+// Remove All - Localy
   void clearLocalCart() {
     _cartItems.clear();
     notifyListeners();
   }
 
+// Remove One - Localy
   void removeOneItem({required String productId}) {
     _cartItems.remove(productId);
     notifyListeners();
+  }
+
+// Get Total - Localy
+  double getTotal({required ProductsProvider productsProvider}) {
+    double total = 0.0;
+
+    _cartItems.forEach((key, value) {
+      final getCurrProduct = productsProvider.findByProdId(value.productId);
+      if (getCurrProduct == null) {
+        total += 0;
+      } else {
+        total += double.parse(getCurrProduct.productPrice) * value.quantity;
+      }
+    });
+    return total;
+  }
+
+// Get Quantity - Localy
+  int getQty() {
+    int total = 0;
+    _cartItems.forEach((key, value) {
+      total += value.quantity;
+    });
+    return total;
+  }
+
+// Check if product is in cart - Localy
+  bool isProdinCart({required String productId}) {
+    return _cartItems.containsKey(productId);
   }
 }

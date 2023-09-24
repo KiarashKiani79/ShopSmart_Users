@@ -153,7 +153,8 @@ class _CartScreenState extends State<CartScreen> {
           'orderDate': Timestamp.now(),
         });
       });
-      await cartProvider.removeAllItemsFromFirestore();
+      await cartProvider.removeAllItemsFromFirestore(
+          msg: "Place Order successfully");
       cartProvider.clearLocalCart();
     } catch (e) {
       await MyAppFunctions.showErrorOrWarningDialog(

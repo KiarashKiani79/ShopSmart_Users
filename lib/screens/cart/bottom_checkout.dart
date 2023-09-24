@@ -47,6 +47,9 @@ class CartBottomSheetWidget extends StatelessWidget {
                   ],
                 ),
               ),
+              const SizedBox(
+                width: 10,
+              ),
               ElevatedButton(
                   onPressed: () async {
                     await function();

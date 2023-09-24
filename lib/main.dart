@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // Providers
 import 'package:provider/provider.dart';
+import 'package:shopsmart_users/providers/order_provider.dart';
 import 'package:shopsmart_users/screens/profile_screen.dart';
 import '/providers/user_provider.dart';
 import '/providers/viewed_recently_provider.dart';
@@ -48,8 +49,7 @@ class MyApp extends StatelessWidget {
               ),
               debugShowCheckedModeBanner: false,
             );
-          }
-          if (snapshot.hasError) {
+          } else if (snapshot.hasError) {
             return MaterialApp(
               home: Scaffold(
                 body: Center(
@@ -78,6 +78,9 @@ class MyApp extends StatelessWidget {
               }),
               ChangeNotifierProvider(create: (_) {
                 return UserProvider();
+              }),
+              ChangeNotifierProvider(create: (_) {
+                return OrderProvider();
               }),
             ],
             child: Consumer<ThemeProvider>(
