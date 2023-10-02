@@ -51,6 +51,24 @@ Shop Smart is an e-commerce mobile app that allows users to shop for various pro
    - Fetched products from Firebase and displayed them in the app.
    - Managed user orders and displayed them in the app.
 
+## Screenshots
+For a full list of screenshots, refer to the **[ScreenShot](https://github.com/KiarashKiani79/ShopSmart_Users/tree/main/screenshots)** folder.
+
+<div align="center">
+    <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/home_screen.jpg" width="200"/>
+    <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/google_sign-in.jpg" width="200"/>
+  <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/login_screen.jpg" width="200"/>
+   <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/add_to_cart.jpg" width="200"/>
+    <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/search_items.jpg" width="200"/>
+    <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/detail_screen.jpg" width="200"/>
+  <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/cart_screen.jpg" width="200"/>
+  <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/signup_error.jpg" width="200"/>
+  <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/profile_screen_guest.jpg" width="200"/>
+  <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/order_screen.jpg" width="200"/>
+   <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/clear_cart.jpg" width="200"/>
+   <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/image_picker.jpg" width="200"/>
+</div>
+
 ## Dependencies
 
 Shop Smart relies on several dependencies to provide its features. You can include these dependencies in your `pubspec.yaml` file as follows:
