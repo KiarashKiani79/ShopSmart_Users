@@ -57,10 +57,10 @@ For a full list of screenshots, refer to the **[ScreenShot](https://github.com/K
 <div align="center">
     <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/home_screen.jpg" width="200"/>
     <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/google_sign-in.jpg" width="200"/>
-  <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/login_screen.jpg" width="200"/>
+   <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/detail_screen.jpg" width="200"/>
    <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/add_to_cart.jpg" width="200"/>
-    <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/search_items.jpg" width="200"/>
-    <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/detail_screen.jpg" width="200"/>
+   <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/search_items.jpg" width="200"/>
+   <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/login_screen.jpg" width="200"/> ///3
   <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/cart_screen.jpg" width="200"/>
   <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/signup_error.jpg" width="200"/>
   <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/profile_screen_guest.jpg" width="200"/>
