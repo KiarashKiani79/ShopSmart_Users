@@ -54,20 +54,21 @@ Shop Smart is an e-commerce mobile app that allows users to shop for various pro
 ## Screenshots
 For a full list of screenshots, refer to the **[ScreenShot](https://github.com/KiarashKiani79/ShopSmart_Users/tree/main/screenshots)** folder.
 
-<div align="center">
-    <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/home_screen.jpg" width="200"/>
-    <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/google_sign-in.jpg" width="200"/>
-   <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/detail_screen.jpg" width="200"/>
-   <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/add_to_cart.jpg" width="200"/>
-   <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/search_items.jpg" width="200"/>
-   <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/login_screen.jpg" width="200"/> ///3
-  <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/cart_screen.jpg" width="200"/>
-  <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/signup_error.jpg" width="200"/>
-  <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/profile_screen_guest.jpg" width="200"/>
-  <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/order_screen.jpg" width="200"/>
-   <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/clear_cart.jpg" width="200"/>
-   <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/image_picker.jpg" width="200"/>
+<div style="padding: 10px;">
+   <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/home_screen.jpg" width="200" style="margin-right: 10px;"/>
+   <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/google_sign-in.jpg" width="200" style="margin-right: 10px;"/>
+   <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/detail_screen.jpg" width="200" style="margin-right: 10px;"/>
+   <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/add_to_cart.jpg" width="200" style="margin-right: 10px;"/>
+   <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/search_items.jpg" width="200" style="margin-right: 10px;"/>
+   <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/login_screen.jpg" width="200" style="margin-right: 10px;"/>
+   <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/cart_screen.jpg" width="200" style="margin-right: 10px;"/>
+   <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/signup_error.jpg" width="200" style="margin-right: 10px;"/>
+   <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/profile_screen_guest.jpg" width="200" style="margin-right: 10px;"/>
+   <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/order_screen.jpg" width="200" style="margin-right: 10px;"/>
+   <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/clear_cart.jpg" width="200" style="margin-right: 10px;"/>
+   <img src="https://github.com/KiarashKiani79/ShopSmart_Users/blob/main/screenshots/image_picker.jpg" width="200" style="margin-right: 10px;"/>
 </div>
+
 
 ## Dependencies
 
